@@ -506,3 +506,40 @@
 .icon-star-on:before { content: "\e90b"; }
 
 .icon-heart-on:before { content: "\e90c"; }
+
+/* Custom icons */
+.nation-us {
+  content: url("./logo/Us.jpg");
+  height: 16px;
+  width: 23px;
+}
+
+.nation-de {
+  content: url("./logo/De.jpg");
+  height: 16px;
+  width: 23px;
+}
+
+.nation-sg {
+  content: url("./logo/Sg.jpg");
+  height: 16px;
+  width: 23px;
+}
+
+.nation-dz {
+  content: url("./logo/Dz.jpg");
+  height: 16px;
+  width: 23px;
+}
+
+.nation-mega {
+  content: url("./logo/Mega.jpg");
+  height: 16px;
+  width: 23px;
+}
+
+.nation-zoo {
+  content: url("./logo/Zoo.jpg");
+  height: 16px;
+  width: 23px;
+}
