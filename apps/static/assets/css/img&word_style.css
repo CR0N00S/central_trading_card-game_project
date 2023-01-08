@@ -1,0 +1,25 @@
+.img_fix_resolution{
+    width: 60%;
+    height: 60%;
+    border: 1px solid black;
+    border-radius: 10px
+}
+
+.Header_Namecard{
+    font-size: 35px;
+    color: red;
+}
+
+.card_info{
+    font-size: 20px;
+    color: white;
+    padding-top: 35px;
+    text-align: justify;
+}
+
+.price{
+    font-size: 20px;
+    color: red;
+    padding-top: 35px;
+    text-align: justify;
+}
