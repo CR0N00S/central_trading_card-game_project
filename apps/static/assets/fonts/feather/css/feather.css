@@ -543,3 +543,9 @@
   height: 16px;
   width: 23px;
 }
+
+.header_icon {
+  content: url("./logo/Van_icon.png");
+  height: 16px;
+  width: 23px;
+}
