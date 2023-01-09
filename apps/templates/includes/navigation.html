@@ -39,12 +39,13 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li>
+            <!-- <li>
                 <label>
                     <i class="icon feather icon-sun" id="theme-indicator"></i>
                     <input type="checkbox" id="theme-switch" class="d-none">
                 </label>
-            </li>
+            </li> -->
+            {% if user.is_authenticated %}
             <li>
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="javascript:" data-toggle="dropdown"><i
@@ -104,28 +105,36 @@
                     </div>
                 </div>
             </li>
+            {% endif %}
             <li>
                 <div class="dropdown drp-user">
                     <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="icon feather icon-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-notification">
-                        <div class="pro-head">
-                            <img src="{{ ASSETS_ROOT }}/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-                            <span>
-                                {{ request.user.username }}    
-                            </span>
-                            <a href="/auth-signin.html" class="dud-logout" title="Logout">
-                                <i class="feather icon-log-out"></i>
-                            </a>
-                        </div>
-                        <ul class="pro-body">
-                            <li><a href="/profile.html" class="dropdown-item"><i class="feather icon-user"></i>
-                                Profile</a></li>
-                            <li><a href="{% url 'logout' %}" class="dropdown-item">
-                                <i class="feather icon-lock"></i> Logout</a>
-                            </li>
-                        </ul>
+                        {% if user.is_authenticated %}
+                            <div class="pro-head">
+                                <img src="{{ ASSETS_ROOT }}/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+                                <span>
+                                    {{ request.user.username }}    
+                                </span>
+                            </div>
+                            <ul class="pro-body">
+                                <li><a href="/profile.html" class="dropdown-item"><i class="feather icon-user"></i>
+                                    Profile</a></li>
+                                <li><a href="{% url 'logout' %}" class="dropdown-item">
+                                    <i class="feather icon-lock"></i> Logout</a>
+                                </li>
+                            </ul>
+                            {% else %}
+                            <ul class="pro-body">
+                                <li><a href="{% url 'login' %}" class="dropdown-item"><i class="feather icon-lock"></i>
+                                    Login</a></li>
+                                <li><a href="{% url 'logout' %}" class="dropdown-item">
+                                    <i class="feather icon-user-plus"></i> Register</a>
+                                </li>
+                            </ul>
+                        {% endif %}
                     </div>
                 </div>
             </li>
