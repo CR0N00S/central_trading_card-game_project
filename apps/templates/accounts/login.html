@@ -15,13 +15,13 @@
             <div class="card">
                 <div class="card-body text-center">
 
-                    <h3 class="mb-4">Login</h3>
+                    <h3 class="mb-4">Sign in</h3>
 
                     <span class="mb-0 text-muted">
                         {% if msg %}
-                            <span class="text-danger">{{ msg | safe }}</span>
+                            <span class="text-danger">Invalid Username or Password</span>
                         {% else %}
-                            Add your credentials
+                            <!-- Sign in with Username -->
                         {% endif %} 
                     </span>
 
@@ -44,7 +44,7 @@
 
                     </form>
 
-                    <p class="mb-0 text-muted">Don’t have an account? <a href="{% url 'register' %}" >Sign UP</a></p>
+                    <p class="mb-0 text-muted">Don’t have an account? <a href="{% url 'register' %}" >Sign Up</a></p>
 
                     <br />
 
