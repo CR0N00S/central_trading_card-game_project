@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.home',                                    # Enable the inner home (home)
+    'apps.authentication',
     'allauth',                                      # OAuth new
     'allauth.account',                              # OAuth new
     'allauth.socialaccount',                        # OAuth new 
     'allauth.socialaccount.providers.github',       # OAuth new 
     'allauth.socialaccount.providers.twitter',      # OAuth new  
-    "sslserver"    
+    "sslserver",
+
 ]
 
 MIDDLEWARE = [
@@ -85,26 +87,17 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-if os.environ.get('DB_ENGINE') and os.environ.get('DB_ENGINE') == "mysql":
-    DATABASES = { 
+import mysql.connector.django
+DATABASES = { 
       'default': {
-        'ENGINE'  : 'django.db.backends.mysql', 
-        'NAME'    : os.getenv('DB_NAME'     , 'appseed_db'),
-        'USER'    : os.getenv('DB_USERNAME' , 'appseed_db_usr'),
-        'PASSWORD': os.getenv('DB_PASS'     , 'pass'),
-        'HOST'    : os.getenv('DB_HOST'     , 'localhost'),
-        'PORT'    : os.getenv('DB_PORT'     , 3306),
-        }, 
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
+            'ENGINE': 'mysql.connector.django',
+            'NAME': 'ctt_project',
+            'USER': 'root',
+            'PASSWORD': 'tan123456',
+            'HOST': '127.0.0.1',
+            'PORT': '3306'
         }
     }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
