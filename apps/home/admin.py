@@ -4,5 +4,11 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from django.contrib import admin
+from .models import card_info,box_info,card_sale,nation,transaction
 
 # Register your models here.
+admin.site.register(card_info)
+admin.site.register(box_info)
+admin.site.register(card_sale)
+admin.site.register(nation)
+admin.site.register(transaction)

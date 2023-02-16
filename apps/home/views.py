@@ -8,12 +8,22 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
+from .models import card_info
+    
 
+# itme={
+#         "mario":"mushroom",
+#         "code": 123
+#     }
+# def card_info (request):
+    
+
+#     context = { 'test' : test}
+#     return HttpResponse(request,'home/templates/Clan_page.html',itme)
 
 #@login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
-
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
