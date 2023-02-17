@@ -9,17 +9,30 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from .models import card_info
+from django.shortcuts import render
     
 
-# itme={
-#         "mario":"mushroom",
-#         "code": 123
-#     }
+itme={
+        "mario":"mushroom",
+        "code": 123
+    }
 # def card_info (request):
     
 
 #     context = { 'test' : test}
 #     return HttpResponse(request,'home/templates/Clan_page.html',itme)
+
+
+# def test(request):
+
+msg ="this is a test"
+#     context ={'message':msg}
+#     html_template = loader.get_template('home/Clan_page.html')
+#     return HttpResponse(html_template.render(context,request)) 
+    
+
+
+
 
 #@login_required(login_url="/login/")
 def index(request):
@@ -30,14 +43,14 @@ def index(request):
 
 #@login_required(login_url="/login/")
 def pages(request):
-    context = {}
+    context = {'message':msg,'itme': itme}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     try:
 
         load_template = request.path.split('/')[-1]
 
-        if load_template == 'admin':
+        if load_template == 'admin':          
             return HttpResponseRedirect(reverse('admin:index'))
         context['segment'] = load_template
 
@@ -52,3 +65,4 @@ def pages(request):
     except:
         html_template = loader.get_template('home/page-500.html')
         return HttpResponse(html_template.render(context, request))
+
