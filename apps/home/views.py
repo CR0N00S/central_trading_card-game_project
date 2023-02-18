@@ -16,20 +16,10 @@ itme={
         "mario":"mushroom",
         "code": 123
     }
-# def card_info (request):
-    
 
-#     context = { 'test' : test}
-#     return HttpResponse(request,'home/templates/Clan_page.html',itme)
-
-
-# def test(request):
 
 msg ="this is a test"
-#     context ={'message':msg}
-#     html_template = loader.get_template('home/Clan_page.html')
-#     return HttpResponse(html_template.render(context,request)) 
-    
+
 data_db = card_info.objects.all()
 nation_test = nation.objects.all()
 card_info_test = card_info.objects.all()
@@ -44,7 +34,7 @@ def index(request):
 
 #@login_required(login_url="/login/")
 def pages(request):
-    context = {'message':msg,'itme': itme,'data_db':data_db,'nation':nation_test,'card01':card_info_test}
+    context = {'message':msg,'itme': itme,'data_db':data_db,'nation':nation_test,'card_info_test':card_info_test}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     try:
@@ -67,3 +57,12 @@ def pages(request):
         html_template = loader.get_template('home/page-500.html')
         return HttpResponse(html_template.render(context, request))
 
+
+    # load_template = request.path.split('/')[-1]
+
+    # if load_template == 'admin':          
+    #     return HttpResponseRedirect(reverse('admin:index'))
+    # context['segment'] = load_template
+
+    # html_template = loader.get_template('home/' + load_template)
+    # return HttpResponse(html_template.render(context, request))

@@ -7,7 +7,6 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-
     <!-- [ Main Content ] start -->
     <div class="pcoded-main-container">
         <div class="pcoded-wrapper">
@@ -74,11 +73,14 @@
                                   <p>{{nation}}</p>
                                   <h2>test</h2>
                                     <table>
-                                        {% for test01 in card01 %}
+                                        {% for tester in card_info_test %}
                                         <tr>
-                                            <td>{{test01.card_name}}</td>
-                                            <td>{{test01.eff_card}}</td>
-                                            <td><img src={{test01.photo_test.url}}></td>
+                                            <td>{{tester.card_name}}</td>
+                                            <td>{{tester.eff_card}}</td>
+
+
+                                            <p>{{tester.photo.url}}</p>
+                                            <td><img src=/static/assets/img_upload{{tester.photo.url}}></td>
                                         </tr>
                                         {% endfor %}
                                     </table>

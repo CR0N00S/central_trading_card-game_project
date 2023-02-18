@@ -8,6 +8,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+
 class card_info (models.Model):
     card_id = models.IntegerField(primary_key=True)
     box_id = models.IntegerField(null=False)
@@ -16,7 +18,9 @@ class card_info (models.Model):
     nation = models.CharField(max_length=500)
     eff_card = models.CharField(max_length=500)
     price_adv = models.IntegerField(null=False)
-    photo_test = models.ImageField(null=True , blank=True ,upload_to='apps/static/assets/img_upload',default="ricado_mk2.jpg")
+    photo = models.ImageField(null=True , blank=True ,upload_to='card_img',default="ricado_mk2.jpg")
+    
+    
     
 
 class box_info(models.Model):
