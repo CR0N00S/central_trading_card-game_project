@@ -65,7 +65,12 @@
                                         </div>
                                     </div>
                                     <p>test</p>
-                                  <h1>{{message}},{{itme.mario}}</h1> 
+                                  <h1>{{message}},{{itme.mario}},{{data_db}}</h1> 
+                                    {% for st in nation %}
+                                    <h1> {{st.id}},{{st.nation}} </h1>
+                                    {% endfor %}
+                                    
+                                  <p>{{nation}}</p>
                                 </div>
                             </div>
                             <!-- [ Main Content ] end -->

@@ -9,7 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from .models import card_info
-from django.shortcuts import render
+from .models import nation
     
 
 itme={
@@ -30,8 +30,8 @@ msg ="this is a test"
 #     html_template = loader.get_template('home/Clan_page.html')
 #     return HttpResponse(html_template.render(context,request)) 
     
-
-
+data_db = card_info.objects.all()
+nation_test = nation.objects.all()
 
 
 #@login_required(login_url="/login/")
@@ -43,7 +43,7 @@ def index(request):
 
 #@login_required(login_url="/login/")
 def pages(request):
-    context = {'message':msg,'itme': itme}
+    context = {'message':msg,'itme': itme,'data_db':data_db,'nation':nation_test}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     try:
