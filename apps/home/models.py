@@ -16,7 +16,7 @@ class card_info (models.Model):
     nation = models.CharField(max_length=500)
     eff_card = models.CharField(max_length=500)
     price_adv = models.IntegerField(null=False)
-    photo = models.CharField(max_length=500)
+    photo_test = models.ImageField(null=True , blank=True ,upload_to='apps/static/assets/img_upload',default="ricado_mk2.jpg")
     
 
 class box_info(models.Model):

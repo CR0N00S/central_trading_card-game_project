@@ -66,11 +66,22 @@
                                     </div>
                                     <p>test</p>
                                   <h1>{{message}},{{itme.mario}},{{data_db}}</h1> 
+
                                     {% for st in nation %}
                                     <h1> {{st.id}},{{st.nation}} </h1>
                                     {% endfor %}
-                                    
+
                                   <p>{{nation}}</p>
+                                  <h2>test</h2>
+                                    <table>
+                                        {% for test01 in card01 %}
+                                        <tr>
+                                            <td>{{test01.card_name}}</td>
+                                            <td>{{test01.eff_card}}</td>
+                                            <td><img src={{test01.photo_test.url}}></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
                                 </div>
                             </div>
                             <!-- [ Main Content ] end -->
