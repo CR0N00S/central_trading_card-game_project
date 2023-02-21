@@ -8,7 +8,7 @@ from django.db import models
 # Create your models here.
 
 class user(models.Model):
-    STATUS = [
+    CUS_OR_SALE = [
         ('customer','Customer'),
         ('seller','Seller')
     ]
@@ -21,4 +21,7 @@ class user(models.Model):
     email = models.EmailField (max_length=60 ,unique=True)
     password = models.CharField(max_length=100 ,unique=True)
     address = models.CharField(max_length=500)
-    sale = models.CharField(max_length=50,choices= STATUS ,default='customer')
+    sale = models.CharField(max_length=50,choices= CUS_OR_SALE ,default='customer')
+    user_photo = models.ImageField(null=True , blank=True ,upload_to='user_icon',default="icon-van.jpg")
+
+    

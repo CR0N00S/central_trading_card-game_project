@@ -75,6 +75,7 @@
                                     <table>
                                         {% for tester in card_info_test %}
                                         <tr>
+                                            <td><a href="{% url 'card_inf' tester.card_id %}">test</a></td>
                                             <td>{{tester.card_name}}</td>
                                             <td>{{tester.eff_card}}</td>
 
