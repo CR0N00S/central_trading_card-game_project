@@ -86,6 +86,20 @@
                                         {% endfor %}
                                     </table>
                                 </div>
+
+                                <a style="color: red; font-size: 70px;">test filter table</a>
+                                <table>
+                                    {% for fil in card_filter_test %}
+                                        <tr>
+                                            <td>{{fil.card_name}}</td>
+                                            <td>{{fil.eff_card}}</td>
+
+
+                                            <p>{{fil.photo.url}}</p>
+                                            <td><img src=/static/assets/img_upload{{fil.photo.url}}></td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
                             </div>
                             <!-- [ Main Content ] end -->
                         </div>

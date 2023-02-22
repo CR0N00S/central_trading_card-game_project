@@ -24,6 +24,8 @@ data_db = card_info.objects.all()
 nation_test = nation.objects.all()
 card_info_test = card_info.objects.all()
 
+card_filter = card_info.objects.all().filter(nation = 'gay_ray')
+
 def card_inf(request,pk):
     
     inf = card_info.objects.get(card_id=pk)
@@ -40,7 +42,8 @@ def index(request):
 
 #@login_required(login_url="/login/")
 def pages(request):
-    context = {'message':msg,'itme': itme,'data_db':data_db,'nation':nation_test,'card_info_test':card_info_test}
+    context = {'message':msg,'itme': itme,'data_db':data_db,'nation':nation_test,'card_info_test':card_info_test,
+                'card_filter_test':card_filter}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     # try:
