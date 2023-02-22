@@ -9,9 +9,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class nation(models.Model):
+    nation = models.AutoField(primary_key=True)
+    nation = models.CharField(max_length=500)
 
 class card_info (models.Model):
-    card_id = models.IntegerField(primary_key=True)
+    card_id = models.AutoField(primary_key=True)
     box_id = models.IntegerField(null=False)
     card_name = models.CharField(max_length=500)
     rarity_card = models.CharField(max_length=3)
@@ -24,7 +27,7 @@ class card_info (models.Model):
     
 
 class box_info(models.Model):
-    box_id = models.IntegerField(primary_key=True)
+    box_id = models.AutoField(primary_key=True)
     box_name = models.CharField(max_length=500)
     number_of_card = models.IntegerField(null=False)
     num_rarity_c = models.IntegerField(null=False)
@@ -34,19 +37,18 @@ class box_info(models.Model):
     day_add = models.DateTimeField(auto_now_add=True)
 
 class card_sale(models.Model):
-    sale_id = models.IntegerField(primary_key=True)
+    sale_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField(null=False,default=0)
     card_id = models.IntegerField(null=False,default=0)
     sale_price = models.IntegerField(null=False,default=0)
     photo_upload = models.CharField(max_length=500)
 
-class nation(models.Model):
-    nation = models.CharField(max_length=500)
-
 class transaction(models.Model):
+    transaction_id = models.AutoField(primary_key=True)
     card_id = models.IntegerField(null=False,default=0)
     saler_id = models.IntegerField(null=False,default=0)
     buyer_id = models.IntegerField(null=False,default=0)
     card_name = models.CharField(max_length=500)
     sale_day = models.DateTimeField(auto_now_add=True)
     price = models.IntegerField(null=False,default=0)
+

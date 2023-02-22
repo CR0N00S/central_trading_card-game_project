@@ -16,7 +16,7 @@ urlpatterns = [
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
 
-    path('card/<str:pk>/',views.card_inf,name='card_inf')
+
 
 ] 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -92,7 +92,7 @@ import mysql.connector.django
 DATABASES = { 
       'default': {
             'ENGINE': 'mysql.connector.django',
-            'NAME': 'ctt_project',
+            'NAME': 'central_project',
             'USER': 'root',
             'PASSWORD': 'tan123456',
             'HOST': '127.0.0.1',
