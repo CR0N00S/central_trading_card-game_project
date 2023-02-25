@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',       # OAuth new 
     'allauth.socialaccount.providers.twitter',      # OAuth new  
     "sslserver",
-
+    'mptt',
 ]
 
 MIDDLEWARE = [

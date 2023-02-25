@@ -59,6 +59,10 @@
                                                 <div class="column" style="width: 50%;">
                                                   <h2>auction?</h2>
                                                   <p>Test</p>
+                                                    card
+                                                    {% for card_filter_nation in card_fii %}
+                                                    <h1>{{card_filter_nation.card_name}}</h1>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                         </div>
@@ -85,21 +89,15 @@
                                         </tr>
                                         {% endfor %}
                                     </table>
+
+                                    {%for btt in bt_te%}
+                                        <h1>{{btt.bt_num}}</h1>
+                                    {% endfor %}
+                                    test
+
+
                                 </div>
 
-                                <a style="color: red; font-size: 70px;">test filter table</a>
-                                <table>
-                                    {% for fil in card_filter_test %}
-                                        <tr>
-                                            <td>{{fil.card_name}}</td>
-                                            <td>{{fil.eff_card}}</td>
-
-
-                                            <p>{{fil.photo.url}}</p>
-                                            <td><img src=/static/assets/img_upload{{fil.photo.url}}></td>
-                                        </tr>
-                                    {% endfor %}
-                                </table>
                             </div>
                             <!-- [ Main Content ] end -->
                         </div>

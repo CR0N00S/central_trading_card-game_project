@@ -9,7 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from .models import card_info
-from .models import nation,card_info
+from .models import nation,card_info,box_info,nation_name,box_has_nation
     
 
 itme={
@@ -23,8 +23,9 @@ msg ="this is a test"
 data_db = card_info.objects.all()
 nation_test = nation.objects.all()
 card_info_test = card_info.objects.all()
+bt_test = box_info.objects.all()
 
-card_filter = card_info.objects.all().filter(nation = 'gay_ray')
+# card_filter = card_info.objects.all().filter(nation = 'gay_ray')
 
 def card_inf(request,pk):
     
@@ -32,6 +33,18 @@ def card_inf(request,pk):
     context = {'inf': inf}
     html_template = loader.get_template('home/Card&deck_info.html')
     return HttpResponse(html_template.render(context,request))
+
+
+
+
+def nation_card_req(request,pk):
+    na_req = nation.objects.get(id=pk)
+    card_fii = card_info.objects.filter(from_nation_id = na_req)
+    context = { 'na_req' : na_req , 'card_fii' : card_fii }
+    html_template = loader.get_template('home/Clan_page.html')
+    return HttpResponse(html_template.render(context,request))
+
+    
 
 #@login_required(login_url="/login/")
 def index(request):
@@ -43,7 +56,7 @@ def index(request):
 #@login_required(login_url="/login/")
 def pages(request):
     context = {'message':msg,'itme': itme,'data_db':data_db,'nation':nation_test,'card_info_test':card_info_test,
-                'card_filter_test':card_filter}
+               'bt_te':bt_test }
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     # try:
