@@ -42,17 +42,24 @@
                                             <div class="row">
                                                 <div class="column" style="width: 50%;">
                                                   <h2>Sale?</h2>
-                                                  <p>Test</p>
-
                                                   <table style="width: 100%;
                                                    text-align: center; border-collapse: collapse;">
-                                                        <tbody>
+                                                        <thead>
                                                             <tr>
-                                                                <td><img src="/static/assets/images/img_test/BT05-002EN-RRR.jpg" alt="van_test" class="img_fix_resolution"></td>
-                                                                <td><img src="/static/assets/images/img_test/BT16-L04EN-LR.jpg" alt="van_test" class="img_fix_resolution"></td>
-                                                                <td><img src="/static/assets/images/img_test/PR-0279EN.jpg" alt="van_test" class="img_fix_resolution"></td>
+                                                              <th>Column 1</th>
+                                                              <th>Column 2</th>
+                                                              <th>Column 3</th>
                                                             </tr>
-                                                        </tbody>
+                                                          </thead>
+                                                          <tbody>
+                                                            {% for card_filter_nation in card_fii %}
+                                                            <tr>
+                                                              <td>{{ card_filter_nation.card_name }}</td>
+                                                              <td>{{ card_filter_nation.card_name }}</td>
+                                                              <td>{{ card_filter_nation.card_name }}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                          </tbody>
                                                     </table>
 
                                                 </div>

@@ -16,12 +16,12 @@ class nation(models.Model):
         return self.nation
 
 class nation_name(models.Model):
-    nation_nam = models.CharField(primary_key=True,max_length=500)
+    nation_nam = models.CharField(primary_key=True,max_length=255)
     def __str__(self):
         return self.nation_nam
 
 class box_infromation(models.Model):
-    box_code = models.CharField(primary_key=True,null=False,max_length=500)  
+    box_code = models.CharField(primary_key=True,null=False,max_length=255)  
     box_name_n = models.CharField(max_length=500,null=False)   
     def __str__(self):
         return self.box_code+ ' '+ self.box_name_n
