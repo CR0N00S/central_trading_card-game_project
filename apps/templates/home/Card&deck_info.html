@@ -44,23 +44,20 @@
                                                 <div class="column" style="width: 50%;">
                                                   <h2>Card Or Deck Pic</h2>
                                                   <div style="text-align: center;">
-                                                    <img src="/static/assets/images/img_test/BT05-002EN-RRR.jpg">
+                                                    <img src="/static/assets/img_upload{{inf.photo.url}}">
                                                   </div>
                                                 </div>
                                                 <div class="column" style="width: 50%;">
                                                   <h2>Card & Deck Info</h2>
                                                   
                                                   <div class="Header_Namecard">
-                                                    BT05-002EN-RRR Majesty Lord Blaster
+                                                    {{inf.card_name}}
                                                   </div>
                                                   <div class="card_info">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam posuere, orci in sollicitudin fringilla, justo neque dictum libero, ac mattis nunc nisl congue dolor. 
-                                                    Suspendisse commodo diam sit amet condimentum ultricies. Praesent vulputate vestibulum mollis. Quisque id lacus dolor. 
-                                                    Maecenas non pellentesque elit. Aliquam vitae tincidunt mi, vitae pulvinar arcu.
-                                                    test
+                                                    {{inf.eff_card}}
                                                   </div>
                                                   <div class="price">
-                                                    50 บาท
+                                                    {{inf.price_adv}} บาท
                                                   </div>
                                                   <div style="padding-top: 50px;">
                                                     <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">Add to cart</button>

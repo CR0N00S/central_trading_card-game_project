@@ -42,25 +42,21 @@
                                             <div class="row">
                                                 <div class="column" style="width: 50%;">
                                                   <h2>Sale?</h2>
-                                                  <table style="width: 100%;
-                                                   text-align: center; border-collapse: collapse;">
-                                                        <thead>
-                                                            <tr>
-                                                              <th>Column 1</th>
-                                                              <th>Column 2</th>
-                                                              <th>Column 3</th>
-                                                            </tr>
-                                                          </thead>
-                                                          <tbody>
-                                                            {% for card_filter_nation in card_fii %}
-                                                            <tr>
-                                                              <td>{{ card_filter_nation.card_name }}</td>
-                                                              <td>{{ card_filter_nation.card_name }}</td>
-                                                              <td>{{ card_filter_nation.card_name }}</td>
-                                                            </tr>
-                                                            {% endfor %}
-                                                          </tbody>
-                                                    </table>
+                                                  
+                                                    {% for card_filter_nation in card_fii %}
+                                                    
+                                                        <div style="float: left;width: 30%;padding: 10px;height: 380px; border: 5px ;border-style: solid;margin: 5px;
+                                                            border-radius: 20px;">
+                                                            <center><img src ="/static/assets/img_upload{{card_filter_nation.photo.url}}" alt="{{card_filter_nation.card_name.url}}" 
+                                                            style="width: 95%;">
+                                                            </center>
+                                                            <center>{{card_filter_nation.card_name}}</center>   
+                                                            <center><a href="{% url 'card_inf' card_filter_nation.card_id %}"><button type="button" class="btn btn-outline-danger" title="" data-toggle="tooltip" 
+                                                            data-original-title="btn btn-outline-danger">Buy it!!!</button></a></center>
+                                                            
+                                                        </div>
+                                                    {% endfor %}
+                                                    
 
                                                 </div>
                                                 <div class="column" style="width: 50%;">
