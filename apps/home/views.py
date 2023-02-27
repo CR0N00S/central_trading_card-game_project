@@ -23,7 +23,7 @@ nation_al = nation_name.objects.all()
 def card_inf(request,pk):
     
     inf = card_infomation.objects.get(card_code=pk)
-    context = {'infomat': inf}
+    context = {'infomat': inf,'new_nation_req_all':nation_al}
     html_template = loader.get_template('home/Card&deck_info.html')
     return HttpResponse(html_template.render(context,request))
 
@@ -49,7 +49,7 @@ def index(request):
 #@login_required(login_url="/login/")
 def pages(request):
     context = {'data_db':data_db,'nation':nation_all,'card_info_test':card_info_test,
-               'bt_te':bt_test }
+               'bt_te':bt_test ,}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     # try:
