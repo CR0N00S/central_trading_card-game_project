@@ -72,3 +72,18 @@ class box_has_nation(models.Model):
     id_box = models.ForeignKey(box_infromation,null=True ,on_delete= models.SET_NULL)
     has_nation = models.ForeignKey(nation_name,null=True ,on_delete= models.SET_NULL)
     
+
+class card_infomation (models.Model):
+    card_code = models.CharField(primary_key=True,max_length=255)
+    card_name_new = models.CharField(max_length=500)
+    grade = models.IntegerField(max_length=10,default=0)
+    effect_card = models.CharField(max_length=500,null=True,default=None)
+    second_effect_card = models.CharField(max_length=500,null=True,blank=True)
+    third_effect_card = models.CharField(max_length=500,null=True,blank=True)
+    fourth_effect_card = models.CharField(max_length=500,null=True,blank=True)
+    fifth_effect_card = models.CharField(max_length=500,null=True,blank=True)
+    card_from_nation = models.ForeignKey(nation_name,null=True,on_delete= models.SET_NULL)
+    price_average = models.IntegerField(null=False)
+    card_photo = models.ImageField(null=True , blank=True ,upload_to='card_img',default="no_infomation.png")
+    def __str__(self):
+        return self.card_code +' '+self.card_name_new

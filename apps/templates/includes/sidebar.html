@@ -40,7 +40,7 @@
                         <span class="pcoded-mtext">Trial Decks</span>
                     </a>
                 </li>
-                <li class="nav-item pcoded-hasmenu">
+                <!-- <li class="nav-item pcoded-hasmenu">
                     <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-package"></i></span><span
                             class="pcoded-mtext">Booster Sets</span></a>
                     <ul class="pcoded-submenu">
@@ -48,12 +48,23 @@
                         <li class=""><a href="/" class="">D-BT02</a></li>
                         <li class=""><a href="/" class="">D-LBT01</a></li>
                     </ul>
-                </li>
+                </li> -->
                 <!-- Sort by nations -->
                 <li class="nav-item pcoded-menu-caption">
                     <label>Nations</label>
                 </li>
-                <li class="nav-item pcoded-hasmenu">
+                {% for nation_req in new_nation_req_all %}
+                    <li class="nav-item">
+                        <a href="{% url 'nation_card_req' nation_req.nation_nam%}" class="nav-link">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-alert-circle"></i>
+                            </span>
+                            <span class="pcoded-mtext">{{nation_req.nation_nam}}</span>
+                        </a>
+                        
+                    </li>
+                {% endfor %}
+                <!-- <li class="nav-item pcoded-hasmenu">
                     <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather nation-ks"></i></span><span
                             class="pcoded-mtext">Keter Sanctuary</span></a>
                     <ul class="pcoded-submenu">
@@ -105,7 +116,7 @@
                         <li class=""><a href="/" class="">All</a></li>
                         <li class=""><a href="/" class="">D-LBT01</a></li>
                     </ul>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item pcoded-hasmenu">
                     <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-star"></i></span><span
                             class="pcoded-mtext">Collaboration</span></a>
@@ -174,18 +185,6 @@
                     </a>
                 </li>  
 
-                {% for st in nation %}
-                    <li class="nav-item">
-                        <a href="{% url 'nation_card_req' st.id%}" class="nav-link">
-                            <span class="pcoded-micon">
-                                <i class="feather icon-alert-circle"></i>
-                            </span>
-                            <span class="pcoded-mtext">{{st.nation}}</span>
-                        </a>
-                        
-                    </li>
-                {% endfor %}
-                    <h1 style="color: red;">Real test</h1>
                     
                     
                 

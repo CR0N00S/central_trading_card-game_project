@@ -44,20 +44,57 @@
                                                 <div class="column" style="width: 50%;">
                                                   <h2>Card Or Deck Pic</h2>
                                                   <div style="text-align: center;">
-                                                    <img src="/static/assets/img_upload{{inf.photo.url}}">
+                                                    <img src="/static/assets/img_upload{{infomat.card_photo.url}}">
                                                   </div>
                                                 </div>
                                                 <div class="column" style="width: 50%;">
                                                   <h2>Card & Deck Info</h2>
                                                   
                                                   <div class="Header_Namecard">
-                                                    {{inf.card_name}}
+                                                    {{infomat.card_name_new}}
                                                   </div>
                                                   <div class="card_info">
-                                                    {{inf.eff_card}}
+                                                    {% if infomat.effect_card is null %}
+                                                        <p></p>
+                                                    {% else %}
+                                                        {{infomat.effect_card}}
+                                                    {% endif %} 
                                                   </div>
+
+                                                  <div class="card_info">
+                                                    {% if infomat.second_effect_card is null %}
+                                                        <p></p>
+                                                    {% else %}
+                                                        {{infomat.second_effect_card}}
+                                                    {% endif %} 
+                                                  </div>
+
+                                                  <div class="card_info">
+                                                    {% if infomat.third_effect_card is null %}
+                                                        <p></p>
+                                                    {% else %}
+                                                        {{infomat.third_effect_card}}
+                                                    {% endif %} 
+                                                  </div>
+
+                                                  <div class="card_info">
+                                                    {% if infomat.fourth_effect_card is null %}
+                                                        <p></p>
+                                                    {% else %}
+                                                        {{infomat.fourth_effect_card}}
+                                                    {% endif %} 
+                                                  </div>
+
+                                                  <div class="card_info">
+                                                    {% if infomat.fifth_effect_card is null %}
+                                                        <p></p>
+                                                    {% else %}
+                                                        {{infomat.fifth_effect_card}}
+                                                    {% endif %} 
+                                                  </div>
+
                                                   <div class="price">
-                                                    {{inf.price_adv}} บาท
+                                                    {{infomat.price_average}} บาท
                                                   </div>
                                                   <div style="padding-top: 50px;">
                                                     <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">Add to cart</button>
@@ -66,10 +103,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h1>test</h1>
-                                    <h1>{{inf.card_name}} </h1>
-                                    <img src=/static/assets/img_upload{{inf.photo.url}}>
-                                    <h1>ggez</h1>
                                 </div>
                                 
                             </div>

@@ -45,13 +45,14 @@
                                                   
                                                     {% for card_filter_nation in card_fii %}
                                                     
-                                                        <div style="float: left;width: 30%;padding: 10px;height: 380px; border: 5px ;border-style: solid;margin: 5px;
+                                                        <div style="float: left;width: 30%;padding: 10px;height: 420px; border: 5px ;border-style: solid;margin: 5px;
                                                             border-radius: 20px;">
-                                                            <center><img src ="/static/assets/img_upload{{card_filter_nation.photo.url}}" alt="{{card_filter_nation.card_name.url}}" 
+                                                            <center><img src ="/static/assets/img_upload{{card_filter_nation.card_photo.url}}" alt="{{card_filter_nation.card_name_new.url}}" 
                                                             style="width: 95%;">
                                                             </center>
-                                                            <center>{{card_filter_nation.card_name}}</center>   
-                                                            <center><a href="{% url 'card_inf' card_filter_nation.card_id %}"><button type="button" class="btn btn-outline-danger" title="" data-toggle="tooltip" 
+                                                            <center>{{card_filter_nation.card_name_new}}</center>   
+                                                            <center><a href="{% url 'card_inf' card_filter_nation.card_code %}"><button type="button" class="btn btn-outline-danger" 
+                                                            title="" data-toggle="tooltip" 
                                                             data-original-title="btn btn-outline-danger">Buy it!!!</button></a></center>
                                                             
                                                         </div>
@@ -64,41 +65,12 @@
                                                   <p>Test</p>
                                                     card
                                                     {% for card_filter_nation in card_fii %}
-                                                    <h1>{{card_filter_nation.card_name}}</h1>
+                                                    <h1>{{card_filter_nation.card_name_new}}</h1>
                                                     {% endfor %}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <p>test</p>
-                                  <h1>{{message}},{{itme.mario}},{{data_db}}</h1> 
-
-                                    {% for st in nation %}
-                                    <h1> {{st.id}},{{st.nation}} </h1>
-                                    {% endfor %}
-
-                                  <p>{{nation}}</p>
-                                  <h2>test</h2>
-                                    <table>
-                                        {% for tester in card_info_test %}
-                                        <tr>
-                                            <td><a href="{% url 'card_inf' tester.card_id %}">test</a></td>
-                                            <td>{{tester.card_name}}</td>
-                                            <td>{{tester.eff_card}}</td>
-
-
-                                            <p>{{tester.photo.url}}</p>
-                                            <td><img src=/static/assets/img_upload{{tester.photo.url}}></td>
-                                        </tr>
-                                        {% endfor %}
-                                    </table>
-
-                                    {%for btt in bt_te%}
-                                        <h1>{{btt.bt_num}}</h1>
-                                    {% endfor %}
-                                    test
-
-
                                 </div>
 
                             </div>
