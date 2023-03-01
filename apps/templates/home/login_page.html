@@ -28,7 +28,16 @@
                         <div class="input-group mb-4">
                             <input type="password" class="form-control" name = "password" placeholder="password">
                         </div>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{message.tags}}"  {% endif %} >{{message}}</li>
+                            {% endfor %}
+                        {% endif %}
+                        
                         <input class="btn btn-primary shadow-2 mb-4" type="submit" value="login">
+
+
 
                     </form>
 

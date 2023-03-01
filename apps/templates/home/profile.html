@@ -63,7 +63,9 @@
                                                 <div class="col-sm-12 mb-4">
                                                     <div class="form-group">
                                                         <label for="add">Address</label>
-                                                        <input type="email" class="form-control" id="add" aria-describedby="emailHelp" placeholder="Your address">
+                                                        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
+                                                               readonly value="{{ request.user.user.address }}">
+                                                        
                                                         <small id="addd" class="form-text text-muted">This is your shipments address</small>
                                                     </div>
                                                 </div>

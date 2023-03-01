@@ -92,10 +92,10 @@ import mysql.connector.django
 DATABASES = { 
       'default': {
             'ENGINE': 'mysql.connector.django',
-            'NAME': 'central_project',
-            'USER': 'root',
-            'PASSWORD': 'tan123456',
-            'HOST': '127.0.0.1',
+            'NAME': 'ctgcp',
+            'USER': 'thalamus',
+            'PASSWORD': 'oJJ9C9aecPTFh7',
+            'HOST': 'thalamus.mysql.argondice.win',
             'PORT': '3306'
         }
     }
