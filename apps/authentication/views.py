@@ -5,14 +5,18 @@ Copyright (c) 2019 - present AppSeed.us
 
 # Create your views here.
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import LoginForm, SignUpForm
 from core.settings import GITHUB_AUTH
 from .models import profile
+from .forms import CustomCreatForm 
 
 def login_page(request):
+        
+        page = 'login'
 
         # if request.user.is_authenticated:
         #     return redirect('/')
@@ -38,9 +42,48 @@ def login_page(request):
                 print('Username Or password is incorrect')
 
         return render(request , 'home/login_page.html')
-    
+
+def register_page(request):
+    page = 'register'
+    form = CustomCreatForm()
+    # phone_form = AnotherForm()
+
+    if request.method == 'POST':
+        form = CustomCreatForm(request.POST)
+        # phone_form = AnotherForm(request.POST)
+        if form.is_valid() :
+
+            user =form.save()
+
+
+            # phone_reg = phone_form.save(commit=False)
+            # phone_reg.user = user
+
+            # phone_reg.save()
+
+            
+            
+            username = form.cleaned_data.get("username")
+            raw_password = form.cleaned_data.get("password1")
+            user = authenticate(username=username, password=raw_password)
+            messages.success(request,'User account was create!!')
+
+            return redirect('home/login_page.html')
+        else:
+            messages.success(request,'Something not right please check again')
+
+
+    context = {'page':page , 'form' :form }
+    return render(request , 'home/User_register.html',context)
+
     
 
+def logoutUser(request):
+    logout(request)
+    return redirect('/')
+    
+
+# from old template not use
 def login_view(request):
     form = LoginForm(request.POST or None)
 
@@ -61,6 +104,7 @@ def login_view(request):
             msg = 'Error validating the form'
 
     return render(request, "accounts/login.html", {"form": form, "msg": msg, "GITHUB_AUTH": GITHUB_AUTH})
+
 
 
 def register_user(request):
@@ -86,3 +130,6 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+
+
+# from old template not use
