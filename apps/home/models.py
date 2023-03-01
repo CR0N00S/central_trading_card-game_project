@@ -17,6 +17,7 @@ class nation(models.Model):
 
 class nation_name(models.Model):
     nation_nam = models.CharField(primary_key=True,max_length=255)
+    nation_favicon = models.CharField(max_length=500,null=True)
     def __str__(self):
         return self.nation_nam
 
@@ -76,7 +77,7 @@ class box_has_nation(models.Model):
 class card_infomation (models.Model):
     card_code = models.CharField(primary_key=True,max_length=255)
     card_name_new = models.CharField(max_length=500)
-    grade = models.IntegerField(max_length=10,default=0)
+    grade = models.IntegerField(default=0)
     effect_card = models.CharField(max_length=500,null=True,default=None)
     second_effect_card = models.CharField(max_length=500,null=True,blank=True)
     third_effect_card = models.CharField(max_length=500,null=True,blank=True)

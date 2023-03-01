@@ -6,8 +6,34 @@ Copyright (c) 2019 - present AppSeed.us
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from .forms import LoginForm, SignUpForm
 from core.settings import GITHUB_AUTH
+from .models import profile
+
+def login_page(request):
+        
+        if request.method == "POST":
+            username = request.POST['username']
+            password = request.POST['password']
+
+            
+            try:
+                user = User.objects.get(username=username)
+            except:
+                print('Username does not exit')
+
+            user = authenticate(request, username=username , password = password)
+
+            if user is not None :
+                login(request, user)
+                return redirect('/')
+            else:
+                print('Username Or password is incorrect')
+
+        return render(request , 'home/login_page.html')
+    
+    
 
 def login_view(request):
     form = LoginForm(request.POST or None)
