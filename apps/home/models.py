@@ -17,7 +17,7 @@ class nation(models.Model):
 
 class nation_name(models.Model):
     nation_nam = models.CharField(primary_key=True,max_length=255)
-    nation_favicon = models.CharField(max_length=500,null=True)
+    nation_favicon = models.CharField(max_length=500,null=True , blank=True)
     def __str__(self):
         return self.nation_nam
 
