@@ -6,6 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import profile
 
 
 class LoginForm(forms.Form):
@@ -58,3 +59,24 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+
+class CustomCreatForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = [ 'email' , 'username' , 'first_name' ,'last_name' ,'password1' , 'password2']
+        labels = { 'first_name' :  'ชื่อ' , 'last_name': 'นามสกุล'
+
+        }
+
+    # def __init__(self,*args,**kwargs):
+    #     super(CustomCreatForm ,self).__init__(*args,**kwargs)
+    #     for name,field in self.fields.items():
+    #         field.widget.attrs.update({'class':'input'})
+
+# class AnotherForm(forms.ModelForm):
+#     class Meta:
+#         model = profile
+#         fields = ['phone']
+#         labels = {'phone': 'เบอร์โทร'}
+    

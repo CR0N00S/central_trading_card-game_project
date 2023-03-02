@@ -6,6 +6,7 @@
 
     <div class="auth-wrapper">
         <div class="auth-content">
+        
             <div class="auth-bg">
                 <span class="r"></span>
                 <span class="r s"></span>
@@ -20,34 +21,24 @@
                     <h3 class="mb-4">Sign up</h3>
 
 
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="ชื่อ">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="นามสกุล">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Phone number">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
-                    </div>
-
-                    <div class="input-group mb-4">
-                        <input type="password" class="form-control" placeholder="password">
-                    </div>
+                    <form method="POST">
+                        {%csrf_token%}
+                        <center>{{form.as_p}}</center>
+                        <center>{{phone_form.as_p}}</center>
+                        <input type="submit" class="btn btn-primary shadow-2 mb-4" value="Sign up">
+                    </form>
                     
-                    <button class="btn btn-primary shadow-2 mb-4">Sign up</button>
 
-
-                    <p class="mb-0 text-muted">Allready have an account? <a href="/login.html"> Sign IN</a></p>
+                    <p>
+                    {% if messages %}
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{message.tags}}"  {% endif %} >{{message}}</li>
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    
+                    <p>{{msg}}</p>
+                    <p class="mb-0 text-muted">Allready have an account? <a href="home/login_page.html"> Sign IN</a></p>
 
                 </div>
             </div>
