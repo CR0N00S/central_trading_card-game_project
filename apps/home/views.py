@@ -5,11 +5,14 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django import template
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect , JsonResponse
 from django.template import loader
 from django.urls import reverse
 from .models import card_info
 from .models import nation,card_info,box_info,nation_name,card_infomation
+from django.shortcuts import render
+from .forms import *
+import json
     
 
 data_db = card_info.objects.all()
@@ -20,6 +23,16 @@ nation_al = nation_name.objects.all()
 
 # card_filter = card_info.objects.all().filter(nation = 'gay_ray')
 
+
+def regis_card(request):
+    card_form = subMit_form()
+
+    print('yeet')
+
+    context = {'card_form':card_form}
+    return render(request , 'home/card-submit-page.html',context)
+
+
 def card_inf(request,pk):
     
     inf = card_infomation.objects.get(card_code=pk)
@@ -28,6 +41,14 @@ def card_inf(request,pk):
     return HttpResponse(html_template.render(context,request))
 
 
+
+def get_cardcode(request):
+    data = json.loads(request.body)
+    nation_data_id = data["id"]
+    print(nation_data_id)
+    card_fi = card_infomation.objects.filter(card_from_nation = nation_data_id)
+    print(card_fi)
+    return JsonResponse(list(card_fi.values("card_code","card_name_new")), safe=False)
 
 
 def nation_card_req(request,pk):

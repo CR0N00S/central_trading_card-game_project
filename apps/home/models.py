@@ -6,6 +6,8 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
+from apps.authentication.models import profile
 
 # Create your models here.
 
@@ -52,21 +54,21 @@ class card_info (models.Model):
     from_box = models.ForeignKey(box_info,null=True ,on_delete= models.SET_NULL )
     from_nation = models.ForeignKey(nation,null=True ,on_delete= models.SET_NULL )
 
-class card_sale(models.Model):
-    sale_id = models.AutoField(primary_key=True)
-    user_id = models.IntegerField(null=False,default=0)
-    card_id = models.IntegerField(null=False,default=0)
-    sale_price = models.IntegerField(null=False,default=0)
-    photo_upload = models.CharField(max_length=500)
+# class card_sale(models.Model):
+#     sale_id = models.AutoField(primary_key=True)
+#     user_id = models.IntegerField(null=False,default=0)
+#     card_id = models.IntegerField(null=False,default=0)
+#     sale_price = models.IntegerField(null=False,default=0)
+#     photo_upload = models.CharField(max_length=500)
 
-class transaction(models.Model):
-    transaction_id = models.AutoField(primary_key=True)
-    card_id = models.IntegerField(null=False,default=0)
-    saler_id = models.IntegerField(null=False,default=0)
-    buyer_id = models.IntegerField(null=False,default=0)
-    card_name = models.CharField(max_length=500)
-    sale_day = models.DateTimeField(auto_now_add=True)
-    price = models.IntegerField(null=False,default=0)
+# class transaction(models.Model):
+#     transaction_id = models.AutoField(primary_key=True)
+#     card_id = models.IntegerField(null=False,default=0)
+#     saler_id = models.IntegerField(null=False,default=0)
+#     buyer_id = models.IntegerField(null=False,default=0)
+#     card_name = models.CharField(max_length=500)
+#     sale_day = models.DateTimeField(auto_now_add=True)
+#     price = models.IntegerField(null=False,default=0)
 
 class box_has_nation(models.Model):
     b_h_n_id = models.AutoField(primary_key=True)
@@ -88,3 +90,12 @@ class card_infomation (models.Model):
     card_photo = models.ImageField(null=True , blank=True ,upload_to='card_img',default="no_infomation.png")
     def __str__(self):
         return self.card_code +' '+self.card_name_new
+    
+class CardWhoWantToSale (models.Model):
+    saleId = models.UUIDField(default=uuid.uuid4 , unique=True ,primary_key=True , editable=False)
+    cardFromNation = models.ForeignKey(nation_name,null=True,on_delete= models.SET_NULL)
+    cardSaleCode = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
+    # userWhoWantSale = models.ForeignKey(profile,null=True,on_delete= models.CASCADE)
+    day_created =models.DateTimeField(auto_now_add=True)
+    cardPhotoWhoWantSale = models.ImageField(null=True , blank=True ,upload_to='sale_photo',default="no_infomation.png")
+    sale_price = models.IntegerField(null=True,default=0)

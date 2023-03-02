@@ -16,6 +16,8 @@ urlpatterns = [
     # ADD NEW Routes HERE
     path('card/<str:pk>/',views.card_inf,name='card_inf'),
     path('nation/<str:pk>/',views.nation_card_req , name='nation_card_req'),
+    path('regis_card/',views.regis_card, name= 'regis_card'),
+    path('get_cardcode' , views.get_cardcode,name= 'getcardcode'),
     
 
     # Leave `Home.Urls` as last the last line
