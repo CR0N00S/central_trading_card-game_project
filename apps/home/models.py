@@ -78,7 +78,7 @@ class card_infomation (models.Model):
     card_code = models.CharField(primary_key=True,max_length=255)
     card_name_new = models.CharField(max_length=500)
     grade = models.IntegerField(default=0)
-    effect_card = models.CharField(max_length=500,null=True,default=None)
+    effect_card = models.CharField(max_length=500,null=True,default=None,blank=True)
     second_effect_card = models.CharField(max_length=500,null=True,blank=True)
     third_effect_card = models.CharField(max_length=500,null=True,blank=True)
     fourth_effect_card = models.CharField(max_length=500,null=True,blank=True)
