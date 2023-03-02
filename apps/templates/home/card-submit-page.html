@@ -46,118 +46,30 @@
                                             <div class="row">
                                                 <div class="card-body">
                                                     <div class="card-body">
-                                                        <form>
+                                                        <form method="POST">
     
                                                             <!-- [Card Info Example] -->
                                                             <div class="form-group" style="text-align: center;">
-                                                                <img src="./static/assets/images/Card_explain.png" width="450" height="505">
+                                                                <img src="/static/assets/images/Card_explain.png" width="450" height="505">
                                                             </div>
                                                             
                                                             <!-- [Upload Section] -->
                                                             <h5>Your Card Informations</h5>
-                                                            <hr>
-                                                            <label>Set / No. / Rarity</label>
-                                                            
-                                                            
-
-
-                                                            <div class="form-group">
-                                                                <label>Nation</label>
-                                                                <select class="form-control" id="nation" disabled="">
-                                                                    <option>Please Select</option>
-                                                                    <option id="KS" hidden="">Keter Sanctuary (ケテルサンクチュアリ)</option>
-                                                                    <option id="DE" hidden="">Dragon Empire (ドラゴンエンパイア)</option>
-                                                                    <option id="BG" hidden="">Brandt Gate (ブラントゲート)</option>
-                                                                    <option id="DS" hidden="">Dark States (ダークステイツ)</option>
-                                                                    <option id="ST" hidden="">Stoicheia (ストイケイア)</option>
-                                                                    <option id="LM" hidden="">Lyrical Monasterio (リリカルモナステリオ)</option>
-                                                                </select>
-                                                            </div>
-                                                            
-                                                            <label>Price</label>
-                                                            <div class="input-group mb-3">
-                                                              <div class="input-group-prepend">
-                                                                  <span class="input-group-text">฿</span>
-                                                              </div>
-                                                              <input type="number" class="form-control" placeholder="Price">
-                                                            </div>
-    
-                                                            <label>Image</label>
-                                                            <div class="form-group">
-                                                              <input type="file" id="img_input" accept="image/png, image/jpeg">
-                                                          </div>
-    
-                                                          <button class="btn btn-primary" type="button">Submit</button>
+                                                            {%csrf_token%}
+                                                            <center>{{card_form.as_p}}</center>
+                                                            <center><input type="submit" class="btn btn-primary shadow-2 mb-4" value="Submit">
+                                                            </center> 
                                                         </form>
                                                     </div>
     
-                                                    <!-- [ Custom script ] -->
-                                                    <script>
-                                                         function disableRarity(cardset){
-                                                            console.log(cardset.value)
-                                                                if(cardset.value != ""){
-                                                                    document.getElementById("cardRarity").disabled = false
-                                                                }
-    
-                                                                if(cardset.value == 0 || cardset.value == 1){
-                                                                    document.getElementById("SP").hidden = false
-                                                                    document.getElementById("H").hidden = false
-                                                                    document.getElementById("DSR").hidden = true
-                                                                    document.getElementById("FFR").hidden = true
-                                                                    document.getElementById("FR").hidden = true
-                                                                    document.getElementById("SEC").hidden = true
-                                                                    document.getElementById("reprint").hidden = true
-                                                                    document.getElementById("extra").hidden = true
-                                                                    document.getElementById("token").hidden = true
-                                                                }
-                                                                else if(cardset.value == 2 || cardset.value == 3){
-                                                                    document.getElementById("SP").hidden = true
-                                                                    document.getElementById("H").hidden = true
-                                                                    document.getElementById("DSR").hidden = false
-                                                                    document.getElementById("FFR").hidden = false
-                                                                    document.getElementById("FR").hidden = false
-                                                                    document.getElementById("SEC").hidden = false
-                                                                    document.getElementById("reprint").hidden = false
-                                                                    document.getElementById("extra").hidden = false
-                                                                    document.getElementById("token").hidden = false
-                                                                }
-                                                        }
-    
-                                                        function disableNation(cardset){
-                                                            if(cardset.value != ""){
-                                                                document.getElementById("nation").disabled = false
-                                                            }
-    
-                                                            if(cardset.value == 0 || cardset.value == 2){
-                                                                document.getElementById("LM").hidden = true
-                                                                document.getElementById("KS").hidden = false
-                                                                document.getElementById("DE").hidden = false
-                                                                document.getElementById("BG").hidden = false
-                                                                document.getElementById("DS").hidden = false
-                                                                document.getElementById("ST").hidden = false
-                                                            }
-                                                            else if(cardset.value == 1 || cardset.value == 3){
-                                                                document.getElementById("LM").hidden = false
-                                                                document.getElementById("KS").hidden = true
-                                                                document.getElementById("DE").hidden = true
-                                                                document.getElementById("BG").hidden = true
-                                                                document.getElementById("DS").hidden = true
-                                                                document.getElementById("ST").hidden = true
-                                                            }
-                                                        }
-                                                    </script>
+                                                   
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                a
 
-                                <form method="POST">
-                                    {%csrf_token%}
-                                    <center>{{card_form.as_p}}</center>
-                                    <input type="submit" class="btn btn-primary shadow-2 mb-4" value="Sign up">
-                                </form>
+
 
 
 

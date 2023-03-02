@@ -8,10 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect , JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .models import card_info
-from .models import nation,card_info,box_info,nation_name,card_infomation
-from django.shortcuts import render
-from .forms import *
+# from apps.authentication.models import profile
+from .models import nation,card_info,box_info,nation_name,card_infomation , card_info
+from django.shortcuts import render , redirect
+from .forms import subMit_form
 import json
     
 
@@ -25,9 +25,24 @@ nation_al = nation_name.objects.all()
 
 
 def regis_card(request):
-    card_form = subMit_form()
 
+
+    card_form = subMit_form()
     print('yeet')
+    profile_add = request.user.username
+
+    if request.method == 'POST':
+        # print(subMit_form(request.POST))
+        card_form = subMit_form(request.POST)
+        # print(card_form)
+        if card_form.is_valid():
+            card_sub = card_form.save(commit=False)
+            card_sub.UserWhoWantSale = profile_add
+            card_sub.save()
+            # return redirect('/')
+        # else:
+        #     print("Something not right please check again")
+
 
     context = {'card_form':card_form}
     return render(request , 'home/card-submit-page.html',context)
@@ -45,10 +60,10 @@ def card_inf(request,pk):
 def get_cardcode(request):
     data = json.loads(request.body)
     nation_data_id = data["id"]
-    print(nation_data_id)
+    # print(nation_data_id)
     card_fi = card_infomation.objects.filter(card_from_nation = nation_data_id)
-    print(card_fi)
-    return JsonResponse(list(card_fi.values("card_code","card_name_new")), safe=False)
+    # print(card_fi)
+    return JsonResponse(list(card_fi.values("card_code")), safe=False)
 
 
 def nation_card_req(request,pk):
