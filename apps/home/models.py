@@ -5,9 +5,9 @@ Copyright (c) 2019 - present AppSeed.us
 
 
 from django.db import models
-from django.contrib.auth.models import User
 import uuid
 from apps.authentication.models import profile
+# from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -94,11 +94,13 @@ class card_infomation (models.Model):
 class CardWhoWantToSale (models.Model):
     saleId = models.UUIDField(default=uuid.uuid4 , unique=True ,primary_key=True , editable=False)
     cardFromNation = models.ForeignKey(nation_name,null=True,on_delete= models.SET_NULL)
-    cardSaleCode = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
+    card_code = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
     
-    userWhoWantSale = models.ForeignKey(profile,null=True,blank=True ,on_delete= models.CASCADE)
+    userWhoWantSale = models.ForeignKey(profile,null=True,on_delete= models.CASCADE)
+    userNameWhoWantSale = models.CharField(max_length=100,null=True,blank=True,editable=False)
+
 
     day_created =models.DateTimeField(auto_now_add=True)
-    cardPhotoWhoWantSale = models.ImageField(null=True , blank=True ,upload_to='sale_photo',default="no_infomation.png")
+    # cardPhotoWhoWantSale = models.ImageField(null=True,upload_to='sale_photo',default="no_infomation.png")
     sale_price = models.IntegerField(null=True,default=0)
     # card_code = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)

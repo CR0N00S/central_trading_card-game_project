@@ -52,7 +52,7 @@
                                                   <h2>Card & Deck Info</h2>
                                                   
                                                   <div class="Header_Namecard">
-                                                    {{infomat.card_name_new}}
+                                                   {{infomat.card_code}} {{infomat.card_name_new}}
                                                   </div>
                                                   <div class="card_info">
                                                     {% if infomat.effect_card is null %}
@@ -98,7 +98,13 @@
                                                     {{infomat.price_average}} บาท
                                                   </div>
                                                   <div style="padding-top: 50px;">
-                                                    <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">Add to cart</button>
+
+
+                                                   <a href="{% url 'get_card_info_regis' infomat.card_code %}"> 
+                                                    <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">You want to sale this card?</button>
+                                                    </a>
+
+
                                                   </div>
                                                 </div>
                                             </div>

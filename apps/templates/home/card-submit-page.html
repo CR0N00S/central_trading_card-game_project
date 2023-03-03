@@ -53,13 +53,21 @@
                                                                 <img src="/static/assets/images/Card_explain.png" width="450" height="505">
                                                             </div>
                                                             
+
+                                                            
                                                             <!-- [Upload Section] -->
                                                             <h5>Your Card Informations</h5>
+                                                            <center>
+                                                                <p>คุณต้องการจะขาย {{cardYouWantToSale.card_name_new}}</p>
+                                                            </center>
+                                                            
                                                             {%csrf_token%}
                                                             <center>{{card_form.as_p}}</center>
                                                             <center><input type="submit" class="btn btn-primary shadow-2 mb-4" value="Submit">
                                                             </center> 
                                                         </form>
+
+                                                        aaaaa
                                                     </div>
     
                                                    
@@ -90,7 +98,7 @@
 <!-- Specific Page JS goes HERE  -->
     
 {% block javascripts %}
-<script>
+<!-- <script>
     
     function getCookie(name) {
         let cookieValue = null;
@@ -111,7 +119,7 @@
 
     
     let nation_field = document.getElementById("id_cardFromNation")
-    let card_field = document.getElementById("id_cardSaleCode")
+    let card_field = document.getElementById("id_card_code")
 
     nation_field.addEventListener("change", get_nation_id)
 
@@ -122,7 +130,7 @@
         const data = { id: nation_name };
 
          
-        let url ="{% url 'getcardcode' %}"
+        let url ="{% comment %}  {% url 'getcardcode' %} {% endcomment %}"
 
             fetch(url, {
               method: "POST", // or 'PUT'
@@ -138,7 +146,7 @@
                 console.log("Success:", data);
                 card_field.innerHTML = '<option value= "" selected = "" >-----</option>'
                 for(let i = 0 ; i < data.length; i++ ){
-                    card_field.innerHTML += `<option value= " ${data[i]} " selected = "" >${data[i]["card_code"]}</option>`
+                    card_field.innerHTML += `<option value= " ${data[i]["card_code"]} " selected = "" >${data[i]["card_code"]}</option>`
                 }
               })
 
@@ -149,7 +157,7 @@
     }
     
 
-</script>
+</script> -->
 
 
 {% endblock javascripts %}

@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect , JsonResponse
 from django.template import loader
 from django.urls import reverse
-# from apps.authentication.models import profile
 from .models import nation,card_info,box_info,nation_name,card_infomation , card_info
 from django.shortcuts import render , redirect
 from .forms import subMit_form
@@ -23,25 +22,52 @@ nation_al = nation_name.objects.all()
 
 # card_filter = card_info.objects.all().filter(nation = 'gay_ray')
 
+def get_card_info_before_regis(request,pk):
+    print(pk)
+    profile_id_add = request.user.username
+    print(profile_id_add)
+    cardYouWantToSale = card_infomation.objects.get(card_code = pk)
+    print(cardYouWantToSale.card_code,cardYouWantToSale.card_from_nation)
 
+    card_form = subMit_form()
+    if request.method == 'POST':
+        card_form = subMit_form(request.POST)
+        if card_form.is_valid():
+            card_sub = card_form.save(commit=False)
+            card_sub.card_code_id = cardYouWantToSale.card_code
+            card_sub.cardFromNation_id = cardYouWantToSale.card_from_nation
+            card_sub.userNameWhoWantSale = profile_id_add
+            card_sub.save()
+
+
+
+    context ={'card_form':card_form , 'cardYouWantToSale' :cardYouWantToSale}
+    html_template = loader.get_template('home/card-submit-page.html')
+    return HttpResponse(html_template.render(context,request))
+
+
+@login_required(login_url="/login/")
 def regis_card(request):
 
 
     card_form = subMit_form()
-    print('yeet')
-    profile_add = request.user.username
+    # print('yeet')
+    profile_id_add = request.user.username
 
     if request.method == 'POST':
         # print(subMit_form(request.POST))
         card_form = subMit_form(request.POST)
         # print(card_form)
         if card_form.is_valid():
+            
             card_sub = card_form.save(commit=False)
-            card_sub.UserWhoWantSale = profile_add
+            card_sub.userNameWhoWantSale = profile_id_add
+            # print(card_sub)
             card_sub.save()
             # return redirect('/')
-        # else:
-        #     print("Something not right please check again")
+        else:
+            print(card_form)
+            print("Something not right please check again")
 
 
     context = {'card_form':card_form}
@@ -57,13 +83,13 @@ def card_inf(request,pk):
 
 
 
-def get_cardcode(request):
-    data = json.loads(request.body)
-    nation_data_id = data["id"]
-    # print(nation_data_id)
-    card_fi = card_infomation.objects.filter(card_from_nation = nation_data_id)
-    # print(card_fi)
-    return JsonResponse(list(card_fi.values("card_code")), safe=False)
+# def get_cardcode(request):
+#     data = json.loads(request.body)
+#     nation_data_id = data["id"]
+#     print(nation_data_id)
+#     card_fi = card_infomation.objects.filter(card_from_nation = nation_data_id)
+#     print(card_fi)
+#     return JsonResponse(list(card_fi.values("card_code" , "card_name_new")), safe=False)
 
 
 def nation_card_req(request,pk):
