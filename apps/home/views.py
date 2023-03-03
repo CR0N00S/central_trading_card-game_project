@@ -21,7 +21,7 @@ bt_test = box_info.objects.all()
 nation_al = nation_name.objects.all()
 
 # card_filter = card_info.objects.all().filter(nation = 'gay_ray')
-
+@login_required(login_url="/login/")
 def get_card_info_before_regis(request,pk):
     print(pk)
     profile_id_add = request.user.username
@@ -38,10 +38,11 @@ def get_card_info_before_regis(request,pk):
             card_sub.cardFromNation_id = cardYouWantToSale.card_from_nation
             card_sub.userNameWhoWantSale = profile_id_add
             card_sub.save()
+        else:
+            print("Something not right please check again")
 
 
-
-    context ={'card_form':card_form , 'cardYouWantToSale' :cardYouWantToSale}
+    context ={'card_form':card_form , 'cardYouWantToSale' :cardYouWantToSale ,'new_nation_req_all':nation_al}
     html_template = loader.get_template('home/card-submit-page.html')
     return HttpResponse(html_template.render(context,request))
 
@@ -64,7 +65,7 @@ def regis_card(request):
             card_sub.userNameWhoWantSale = profile_id_add
             # print(card_sub)
             card_sub.save()
-            # return redirect('/')
+            return redirect('/')
         else:
             print(card_form)
             print("Something not right please check again")

@@ -96,11 +96,11 @@ class CardWhoWantToSale (models.Model):
     cardFromNation = models.ForeignKey(nation_name,null=True,on_delete= models.SET_NULL)
     card_code = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
     
-    userWhoWantSale = models.ForeignKey(profile,null=True,on_delete= models.CASCADE)
-    userNameWhoWantSale = models.CharField(max_length=100,null=True,blank=True,editable=False)
+    # userWhoWantSale = models.ForeignKey(profile,null=True,on_delete= models.CASCADE)
+    userNameWhoWantSale = models.CharField(max_length=100,null=True,editable=False)
 
 
     day_created =models.DateTimeField(auto_now_add=True)
-    # cardPhotoWhoWantSale = models.ImageField(null=True,upload_to='sale_photo',default="no_infomation.png")
+    cardPhotoWhoWantSale = models.ImageField(null=True,upload_to='sale_photo')
     sale_price = models.IntegerField(null=True,default=0)
     # card_code = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
