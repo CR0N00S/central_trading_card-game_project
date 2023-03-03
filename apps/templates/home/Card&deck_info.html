@@ -116,7 +116,7 @@
 
                                         {% if sale_filter.exists %}
 
-                                            <table style="width: 80%; font-size: 120%;">
+                                            <table style="width: 100%; font-size: 120%;">
                                                 <thead>
                                                     <tr>
                                                         <th>วันที่ลงขาย</th>
@@ -130,6 +130,17 @@
                                                             <td>{{ sale_fill.day_created }}</td>
                                                             <td>{{ sale_fill.userNameWhoWantSale }}</td>
                                                             <td>{{ sale_fill.sale_price }}</td>
+                                                            
+                                                            {% if your_profile == sale_fill.userNameWhoWantSale %}
+                                                            <td> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">
+                                                                    edit your price
+                                                                </button></td>
+                                                            {% else %}
+                                                            <td> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">
+                                                                buy this card from {{ sale_fill.userNameWhoWantSale }}
+                                                                </button></td>
+                                                            {% endif %}
+                                                            
                                                         </tr>
                                                     {% endfor %}
                                                 </tbody>
@@ -138,6 +149,9 @@
                                         {% else %}
                                             <center><h1>No one sale this card yet</h1> </center>
                                         {% endif %}
+
+
+                                        a {{your_profile}}
                                     </div>
                                 </div>
                                 

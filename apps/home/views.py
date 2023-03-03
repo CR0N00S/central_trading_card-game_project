@@ -22,8 +22,8 @@ card_info_test = card_info.objects.all()
 bt_test = box_info.objects.all()
 nation_al = nation_name.objects.all()
 
-
 # card_filter = card_info.objects.all().filter(nation = 'gay_ray')
+
 @login_required(login_url="/login/")
 def get_card_info_before_regis(request,pk):
     # print(pk)
@@ -37,21 +37,21 @@ def get_card_info_before_regis(request,pk):
     if request.method == 'POST':
         card_form = subMit_form(request.POST)
         if card_form.is_valid():
-
             card_sub = card_form.save(commit=False)
-            if card_sub.sale_price > cardYouWantToSale.price_average*0.8 or card_sub.sale_price < cardYouWantToSale.price_average*0.8 or card_sub.sale_price <= 0  :
-                print(messages.success(request,'****ราคาที่คุณตั้งขายต้องไม่มากว่าหรือน้อยกว่า 80% ของราคากลาง****'))
+            if card_sub.sale_price > cardYouWantToSale.price_average +(cardYouWantToSale.price_average*0.2) or card_sub.sale_price < cardYouWantToSale.price_average - (cardYouWantToSale.price_average*0.2) or card_sub.sale_price <= 0  :
+                messages.success(request,'****ราคาที่คุณตั้งขายต้องไม่มากว่าหรือน้อยกว่า 80% ของราคากลาง และไม่น้อยกว่า 0 ****')
             else:
                 card_sub.card_code_id = cardYouWantToSale.card_code
                 card_sub.cardFromNation_id = cardYouWantToSale.card_from_nation
                 card_sub.userNameWhoWantSale = profile_id_add
             # print('yeet',card_sub.sale_price)
-                card_sub.save()
+                # card_sub.save()
+                return redirect('/')
         else:
             print("Something not right please check again")
 
 
-    context ={'card_form':card_form , 'cardYouWantToSale' :cardYouWantToSale ,'new_nation_req_all':nation_al}
+    context ={'card_form':card_form , 'cardYouWantToSale' :cardYouWantToSale ,'new_nation_req_all':nation_al }
     html_template = loader.get_template('home/card-submit-page.html')
     return HttpResponse(html_template.render(context,request))
 
@@ -87,12 +87,14 @@ def card_inf(request,pk):
     
     inf = card_infomation.objects.get(card_code=pk)
     sale_filter = CardWhoWantToSale
+    your_profile = request.user.username
     try:
         sale_filter = CardWhoWantToSale.objects.filter(card_code_id = pk)
     except sale_filter.DoesNotExist:
         sale_filter = None
     print(sale_filter)
-    context = {'infomat': inf,'new_nation_req_all':nation_al , 'sale_filter' :sale_filter}
+    
+    context = {'infomat': inf,'new_nation_req_all':nation_al , 'sale_filter' :sale_filter ,'your_profile' : your_profile}
     html_template = loader.get_template('home/Card&deck_info.html')
     return HttpResponse(html_template.render(context,request))
 
