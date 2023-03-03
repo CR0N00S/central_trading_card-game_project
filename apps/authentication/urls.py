@@ -7,6 +7,8 @@ from django.urls import path, include
 from .views import login_view, register_user
 from django.contrib.auth.views import LogoutView
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('login_new/',views.login_page, name= 'login_form'),
@@ -18,4 +20,7 @@ urlpatterns = [
     path('register/', register_user, name="register"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path('social_login/', include('allauth.urls')),
+
 ]
+
+

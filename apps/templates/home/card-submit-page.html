@@ -49,6 +49,8 @@
                                                         <form method="POST">
     
                                                             <!-- [Card Info Example] -->
+
+                                                            
                                                             <div class="form-group" style="text-align: center;">
                                                                 <img src="/static/assets/images/Card_explain.png" width="450" height="505">
                                                             </div>
@@ -58,9 +60,14 @@
                                                             <!-- [Upload Section] -->
                                                             <h5>Your Card Informations</h5>
                                                             <center>
-                                                                <p>คุณต้องการจะขาย {{cardYouWantToSale.card_name_new}}</p>
+                                                                <p>คุณต้องการจะขาย {{cardYouWantToSale.card_code}} {{cardYouWantToSale.card_name_new}}</p>
                                                             </center>
-                                                            
+                                                            {% if messages %}
+                                                                {% for message in messages %}
+                                                                  <center style="color: red;"><li {% if message.tags %} class="{{message.tags}}"  {% endif %} >{{message}}</li></center>
+                                                                {% endfor %}
+                                                            {% endif %}
+
                                                             {%csrf_token%}
                                                             <center>{{card_form.as_p}}</center>
                                                             <center><input type="submit" class="btn btn-primary shadow-2 mb-4" value="Submit">

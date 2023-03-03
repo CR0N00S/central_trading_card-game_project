@@ -110,6 +110,35 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div >
+                                        test
+
+                                        {% if sale_filter.exists %}
+
+                                            <table style="width: 80%; font-size: 120%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>วันที่ลงขาย</th>
+                                                        <th>ผู้ขาย</th>
+                                                        <th>ราคา</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for sale_fill in sale_filter %}
+                                                        <tr>
+                                                            <td>{{ sale_fill.day_created }}</td>
+                                                            <td>{{ sale_fill.userNameWhoWantSale }}</td>
+                                                            <td>{{ sale_fill.sale_price }}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+
+                                        {% else %}
+                                            <center><h1>No one sale this card yet</h1> </center>
+                                        {% endif %}
+                                    </div>
                                 </div>
                                 
                             </div>
