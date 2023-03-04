@@ -110,10 +110,12 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div >
+                                    <div>
                                         test
-
+                                    </div>
+                                    <div class="card" style="padding-left: 5%; padding-top: 1%; border-radius: 10px;">
+                                        
+                                       <div>
                                         {% if sale_filter.exists %}
 
                                             <table style="width: 100%; font-size: 120%;">
@@ -132,9 +134,13 @@
                                                             <td>{{ sale_fill.sale_price }}</td>
                                                             
                                                             {% if your_profile == sale_fill.userNameWhoWantSale %}
-                                                            <td> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">
-                                                                    edit your price
-                                                                </button></td>
+
+                                                            <td>
+                                                                <a href="{% url 'update_sale' sale_fill %}">
+                                                                    <input type="button" value="test">
+                                                                </a>
+                                                            </td>
+
                                                             {% else %}
                                                             <td> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">
                                                                 buy this card from {{ sale_fill.userNameWhoWantSale }}
@@ -149,9 +155,14 @@
                                         {% else %}
                                             <center><h1>No one sale this card yet</h1> </center>
                                         {% endif %}
-
-
-                                        a {{your_profile}}
+                                    </div> 
+                                        
+                                        
+                                            
+                                            
+                                           
+                                        
+                                        
                                     </div>
                                 </div>
                                 

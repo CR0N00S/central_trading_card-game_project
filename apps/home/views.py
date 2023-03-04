@@ -99,6 +99,11 @@ def card_inf(request,pk):
     return HttpResponse(html_template.render(context,request))
 
 
+def update_sale(request,pk):
+    print('yeet', pk)
+    context={}
+    html_template = loader.get_template('home/card-submit-page.html')
+    return HttpResponse(html_template.render(context,request))
 
 # def get_cardcode(request):
 #     data = json.loads(request.body)
