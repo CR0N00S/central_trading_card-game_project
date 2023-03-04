@@ -45,7 +45,7 @@ def get_card_info_before_regis(request,pk):
                 card_sub.cardFromNation_id = cardYouWantToSale.card_from_nation
                 card_sub.userNameWhoWantSale = profile_id_add
             # print('yeet',card_sub.sale_price)
-                # card_sub.save()
+                card_sub.save()
                 return redirect('/')
         else:
             print("Something not right please check again")
