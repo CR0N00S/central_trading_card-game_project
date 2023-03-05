@@ -21,8 +21,9 @@ urlpatterns = [
     # path('get_cardcode' , views.get_cardcode,name= 'getcardcode'),
     path('regis_card_fill/<str:pk>/',views.get_card_info_before_regis, name= 'get_card_info_regis'),
     path('updata_sale_card/<str:pk>',views.update_sale ,name ='update_sale' ),
+    path('delelte_card/<str:pk>',views.del_sale ,name ='del_sale' ),
     
-
+    
     # Leave `Home.Urls` as last the last line
     path("", include("apps.home.urls"))
 ] 

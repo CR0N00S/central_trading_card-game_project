@@ -71,11 +71,11 @@ def regis_card(request):
         if card_form.is_valid():
             card_sub = card_form.save(commit=False)
             card_sub.userNameWhoWantSale = profile_id_add
-            print(card_sub)
+            # print(card_sub)
             card_sub.save()
             return redirect('/')
         else:
-            print(card_form)
+            # print(card_form)
             print("Something not right please check again")
 
 
@@ -92,7 +92,7 @@ def card_inf(request,pk):
         sale_filter = CardWhoWantToSale.objects.filter(card_code_id = pk)
     except sale_filter.DoesNotExist:
         sale_filter = None
-    print(sale_filter)
+    # print(sale_filter)
     
     context = {'infomat': inf,'new_nation_req_all':nation_al , 'sale_filter' :sale_filter ,'your_profile' : your_profile}
     html_template = loader.get_template('home/Card&deck_info.html')
@@ -127,6 +127,16 @@ def update_sale(request,pk):
     html_template = loader.get_template('home/card-submit-page.html')
     return HttpResponse(html_template.render(context,request))
 
+
+@login_required(login_url="/login_new/")
+def del_sale(request,pk):
+    find_del_sale = CardWhoWantToSale.objects.get(saleId = pk)
+    if request.method == 'POST':
+        find_del_sale.delete()
+        return redirect('/')
+    context={}
+    html_template = loader.get_template('home/card-submit-page.html')
+    return HttpResponse(html_template.render(context,request))
 
 
 

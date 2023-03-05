@@ -124,6 +124,8 @@
                                                         <th>วันที่ลงขาย</th>
                                                         <th>ผู้ขาย</th>
                                                         <th>ราคา</th>
+                                                        <th></th>
+                                                        <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -137,16 +139,12 @@
 
                                                             <td>
                                                                 <a href="{% url 'update_sale' sale_fill.saleId %}">
-                                                                    <input type="button" class="btn btn-primary" value="ต้องการเปลี่ยนราคา?">
+                                                                    <input type="button" class="btn btn-primary" value="Edit?">
+                                                                </a>
+                                                                <a href="{% url 'del_sale' sale_fill.saleId %}">
+                                                                    <input type="button" class="btn btn-danger" value="Delete?">
                                                                 </a>
                                                             </td>
-                                                            
-                                                            <td>
-                                                                <a href="google.com">
-                                                                    <input type="button" class="btn btn-danger" value="ลบการขายนี้?">
-                                                                </a>
-                                                            </td>
-
                                                             {% else %}
                                                             <td> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">
                                                                 ซื้อการ์ดนี้จากคุณ {{ sale_fill.userNameWhoWantSale }}
