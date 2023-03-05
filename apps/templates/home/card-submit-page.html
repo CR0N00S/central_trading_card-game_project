@@ -67,9 +67,14 @@
                                                                   <center style="color: red;"><li {% if message.tags %} class="{{message.tags}}"  {% endif %} >{{message}}</li></center>
                                                                 {% endfor %}
                                                             {% endif %}
-
+                                                            <center>
+                                                            <p>now avergae is {{card_price_search}}</p>
+                                                            <p>now upper is {{upper}}</p>
+                                                            <p>and lower is {{lower}} </p>
+                                                            </center>
                                                             {%csrf_token%}
                                                             <center>{{card_form.as_p}}</center>
+                                                            <center>{{form.as_p}}</center>
                                                             <center><input type="submit" class="btn btn-primary shadow-2 mb-4" value="Submit">
                                                             </center> 
                                                         </form>

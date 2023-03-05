@@ -136,14 +136,14 @@
                                                             {% if your_profile == sale_fill.userNameWhoWantSale %}
 
                                                             <td>
-                                                                <a href="{% url 'update_sale' sale_fill %}">
-                                                                    <input type="button" value="test">
+                                                                <a href="{% url 'update_sale' sale_fill.saleId %}">
+                                                                    <input type="button" class="btn btn-primary" value="ต้องการเปลี่ยนราคา?">
                                                                 </a>
                                                             </td>
 
                                                             {% else %}
                                                             <td> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">
-                                                                buy this card from {{ sale_fill.userNameWhoWantSale }}
+                                                                ซื้อการ์ดนี้จากคุณ {{ sale_fill.userNameWhoWantSale }}
                                                                 </button></td>
                                                             {% endif %}
                                                             

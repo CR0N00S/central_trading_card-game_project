@@ -10,7 +10,7 @@ from django.template import loader
 from django.urls import reverse
 from .models import nation,card_info,box_info,nation_name,card_infomation , card_info ,CardWhoWantToSale
 from django.shortcuts import render , redirect
-from .forms import subMit_form
+from .forms import * 
 # from django.core.exceptions import ObjectDoesNotExist
 # import json
 from django.contrib import messages
@@ -24,16 +24,17 @@ nation_al = nation_name.objects.all()
 
 # card_filter = card_info.objects.all().filter(nation = 'gay_ray')
 
-@login_required(login_url="/login/")
+@login_required(login_url="/login_new/")
 def get_card_info_before_regis(request,pk):
     # print(pk)
     profile_id_add = request.user.username
     # print(profile_id_add)
     cardYouWantToSale = card_infomation.objects.get(card_code = pk)
-    print(cardYouWantToSale.card_code,cardYouWantToSale.card_from_nation)
-    
-
+    # print(cardYouWantToSale.card_code,cardYouWantToSale.card_from_nation)
     card_form = subMit_form()
+
+    upper = cardYouWantToSale.price_average +(cardYouWantToSale.price_average*0.2)
+    lower = cardYouWantToSale.price_average - (cardYouWantToSale.price_average*0.2)
     if request.method == 'POST':
         card_form = subMit_form(request.POST)
         if card_form.is_valid():
@@ -51,15 +52,14 @@ def get_card_info_before_regis(request,pk):
             print("Something not right please check again")
 
 
-    context ={'card_form':card_form , 'cardYouWantToSale' :cardYouWantToSale ,'new_nation_req_all':nation_al }
+    context ={'card_form':card_form , 'cardYouWantToSale' :cardYouWantToSale ,'new_nation_req_all':nation_al  , 
+              'upper':upper , 'lower' : lower , 'card_price_search': cardYouWantToSale.price_average }
     html_template = loader.get_template('home/card-submit-page.html')
     return HttpResponse(html_template.render(context,request))
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/login_new/")
 def regis_card(request):
-
-
     card_form = subMit_form()
     # print('yeet')
     profile_id_add = request.user.username
@@ -99,11 +99,37 @@ def card_inf(request,pk):
     return HttpResponse(html_template.render(context,request))
 
 
+
+
+@login_required(login_url="/login_new/")
 def update_sale(request,pk):
-    print('yeet', pk)
-    context={}
+    
+    sale_update = CardWhoWantToSale.objects.get(saleId = pk)
+    # print(sale_update.card_code_id)
+    card_price_search = card_infomation.objects.get(card_code = sale_update.card_code_id)
+    # print(card_price_search.price_average)
+    form = subMit_update_form(instance=sale_update)
+    upper = card_price_search.price_average +(card_price_search.price_average*0.2)
+    lower = card_price_search.price_average - (card_price_search.price_average*0.2)
+    if request.method == 'POST':
+        form = subMit_update_form (request.POST ,instance=sale_update)
+        form.save(commit=False)
+        price_check = form.cleaned_data['sale_price']
+        if form.is_valid():
+            
+            if price_check > card_price_search.price_average +(card_price_search.price_average*0.2) or price_check < card_price_search.price_average - (card_price_search.price_average*0.2) or price_check <= 0  :
+                messages.success(request,'****ราคาที่คุณตั้งขายต้องไม่มากว่าหรือน้อยกว่า 80% ของราคากลาง และไม่น้อยกว่า 0 ****')
+            else:
+                # print('save!!!')
+                form.save()
+                return redirect('/')
+    context={'form' : form , 'upper' : upper , 'lower' : lower , 'card_price_search': card_price_search.price_average }
     html_template = loader.get_template('home/card-submit-page.html')
     return HttpResponse(html_template.render(context,request))
+
+
+
+
 
 # def get_cardcode(request):
 #     data = json.loads(request.body)
