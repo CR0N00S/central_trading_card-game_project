@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect , JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .models import box_info,nation_name,card_infomation ,CardWhoWantToSale
+from .models import box_info,nation_name,card_infomation ,CardWhoWantToSale , transaction_table
 from django.shortcuts import render , redirect
 from .forms import * 
 from apps.authentication.models import profile
@@ -117,39 +117,31 @@ def del_sale(request,pk):
 
 
 def saleConfirm(request,pk):
-    form = transaction_submit()
+    buy_form = transaction_submit()
     saleSearch = CardWhoWantToSale.objects.get(saleId = pk)
     from_user =  saleSearch.userNameWhoWantSale
     to_user = request.user.username
     what_card = saleSearch.card_code_id
     buyer_addr = request.user.profile.address
     phone_num = request.user.profile.phone
-    # print(saleSearch)
-    print(from_user)
-    print(to_user)
 
-    # print(form.fromSalerUser)
     if request.method == 'POST':
         
-        form = transaction_submit(request.POST)
+        buy_form = transaction_submit(request.POST)
         
-        # print(form.fromSalerUser)
-
-        # print('yeet')
-        # print(form.fromSalerUser)
-        if form.is_valid():
-            form.save(commit=False)
-            
-            form.fromSalerUser = from_user
-            form.toBuyerUser = to_user
-            form.buyerAddr = buyer_addr
-            form.buyerPhone = phone_num
-            form.card_code = what_card
-            print(form)
+        if buy_form.is_valid():
+            buy=buy_form.save(commit=False)
+            buy.fromSalerUser = from_user
+            buy.toBuyerUser = to_user
+            buy.buyerAddr = buyer_addr
+            buy.buyerPhone = phone_num
+            buy.card_code = what_card
             print('ez')
-            form.save()
+            buy_form.save()
+            saleSearch.delete()
+            return redirect('/')
     
-    context={'buy_form': form}
+    context={}
     html_template = loader.get_template('home/card-submit-page.html')
     return HttpResponse(html_template.render(context,request))
 

@@ -6,7 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django.db import models
 import uuid
-from apps.authentication.models import profile
+# from apps.authentication.models import profile
 # from django.contrib.auth.models import User
 
 # Create your models here.
@@ -102,14 +102,15 @@ class CardWhoWantToSale (models.Model):
     # card_code = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
     # userWhoWantSale = models.ForeignKey(profile,null=True,on_delete= models.CASCADE)
 
+
+
 class transaction_table (models.Model):
     transaction_id = models.UUIDField(default=uuid.uuid4 , unique=True ,primary_key=True , editable=False)
-
-    fromSalerUser = models.CharField(max_length=100,null=True)
-    toBuyerUser = models.CharField(max_length=100,null=True)
-    buyerAddr = models.CharField(max_length=500,null=True)
-    buyerPhone = models.CharField(max_length=10, null=True)
+    fromSalerUser = models.CharField(max_length=100,null=True,blank=True)
+    toBuyerUser = models.CharField(max_length=100,null=True,blank=True)
+    buyerAddr = models.CharField(max_length=500,null=True,blank=True)
+    buyerPhone = models.CharField(max_length=10, null=True,blank=True)
     saleDay =models.DateTimeField(auto_now_add=True)
-    card_code = models.CharField(max_length=500,null=True)
+    card_code = models.CharField(max_length=500,null=True,blank=True)
 
     # saleRateing = models.IntegerField()

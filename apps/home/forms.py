@@ -24,7 +24,8 @@ class subMit_update_form (forms.ModelForm):
 class transaction_submit (forms.ModelForm):
     class Meta:
         model = transaction_table
-        fields = ['fromSalerUser','toBuyerUser','buyerAddr','buyerPhone','card_code']
+        fields = "__all__"
+        # fields = ['fromSalerUser','toBuyerUser','buyerAddr','buyerPhone','card_code']
 
 
 
