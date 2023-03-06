@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import CardWhoWantToSale
+from .models import CardWhoWantToSale,transaction_table
 
 class subMit_form (forms.ModelForm):
     class Meta:
@@ -19,3 +19,12 @@ class subMit_update_form (forms.ModelForm):
         # fields = "__all__"
         fields = ['sale_price']
         labels = {'sale_price':'ราคาที่ต้องการจะตั้ง'}
+
+
+class transaction_submit (forms.ModelForm):
+    class Meta:
+        model = transaction_table
+        fields = ['fromSalerUser','toBuyerUser','buyerAddr','buyerPhone','card_code']
+
+
+

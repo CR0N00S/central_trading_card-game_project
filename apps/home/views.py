@@ -11,6 +11,8 @@ from django.urls import reverse
 from .models import box_info,nation_name,card_infomation ,CardWhoWantToSale
 from django.shortcuts import render , redirect
 from .forms import * 
+from apps.authentication.models import profile
+
 # from django.core.exceptions import ObjectDoesNotExist
 # import json
 from django.contrib import messages
@@ -113,6 +115,43 @@ def del_sale(request,pk):
     html_template = loader.get_template('home/card-submit-page.html')
     return HttpResponse(html_template.render(context,request))
 
+
+def saleConfirm(request,pk):
+    form = transaction_submit()
+    saleSearch = CardWhoWantToSale.objects.get(saleId = pk)
+    from_user =  saleSearch.userNameWhoWantSale
+    to_user = request.user.username
+    what_card = saleSearch.card_code_id
+    buyer_addr = request.user.profile.address
+    phone_num = request.user.profile.phone
+    # print(saleSearch)
+    print(from_user)
+    print(to_user)
+
+    # print(form.fromSalerUser)
+    if request.method == 'POST':
+        
+        form = transaction_submit(request.POST)
+        
+        # print(form.fromSalerUser)
+
+        # print('yeet')
+        # print(form.fromSalerUser)
+        if form.is_valid():
+            form.save(commit=False)
+            
+            form.fromSalerUser = from_user
+            form.toBuyerUser = to_user
+            form.buyerAddr = buyer_addr
+            form.buyerPhone = phone_num
+            form.card_code = what_card
+            print(form)
+            print('ez')
+            form.save()
+    
+    context={'buy_form': form}
+    html_template = loader.get_template('home/card-submit-page.html')
+    return HttpResponse(html_template.render(context,request))
 
 
 

@@ -146,9 +146,10 @@
                                                                 </a>
                                                             </td>
                                                             {% else %}
-                                                            <td> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">
+                                                            
+                                                            <td> <a href="{% url 'saleConfirm' sale_fill.saleId %}"> <button type="button" class="btn btn-primary" title="" data-toggle="tooltip">
                                                                 ซื้อการ์ดนี้จากคุณ {{ sale_fill.userNameWhoWantSale }}
-                                                                </button></td>
+                                                                </button> </a> </td>
                                                             {% endif %}
                                                             
                                                         </tr>
