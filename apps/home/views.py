@@ -58,31 +58,6 @@ def get_card_info_before_regis(request,pk):
     return HttpResponse(html_template.render(context,request))
 
 
-@login_required(login_url="/login_new/")
-def regis_card(request):
-    card_form = subMit_form()
-    # print('yeet')
-    profile_id_add = request.user.username
-
-    if request.method == 'POST':
-        # print(subMit_form(request.POST))
-        card_form = subMit_form(request.POST)
-        # print(card_form)
-        if card_form.is_valid():
-            card_sub = card_form.save(commit=False)
-            card_sub.userNameWhoWantSale = profile_id_add
-            # print(card_sub)
-            card_sub.save()
-            return redirect('/')
-        else:
-            # print(card_form)
-            print("Something not right please check again")
-
-
-    context = {'card_form':card_form}
-    return render(request , 'home/card-submit-page.html',context)
-
-
 def card_inf(request,pk):
     
     inf = card_infomation.objects.get(card_code=pk)
@@ -139,15 +114,6 @@ def del_sale(request,pk):
     return HttpResponse(html_template.render(context,request))
 
 
-
-
-# def get_cardcode(request):
-#     data = json.loads(request.body)
-#     nation_data_id = data["id"]
-#     print(nation_data_id)
-#     card_fi = card_infomation.objects.filter(card_from_nation = nation_data_id)
-#     print(card_fi)
-#     return JsonResponse(list(card_fi.values("card_code" , "card_name_new")), safe=False)
 
 
 def nation_card_req(request,pk):

@@ -73,7 +73,7 @@
                                                             <p>and lower is {{lower}} </p>
                                                             </center>
 
-                                                            
+
                                                             {%csrf_token%}
                                                             <center>{{card_form.as_p}}</center>
                                                             <center>{{form.as_p}}</center>
@@ -110,66 +110,6 @@
 <!-- Specific Page JS goes HERE  -->
     
 {% block javascripts %}
-<!-- <script>
-    
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    const csrftoken = getCookie('csrftoken');
-
-    
-    let nation_field = document.getElementById("id_cardFromNation")
-    let card_field = document.getElementById("id_card_code")
-
-    nation_field.addEventListener("change", get_nation_id)
-
-    function get_nation_id(e){
-        console.log(e.target.value)
-        let nation_name = e.target.value    
-
-        const data = { id: nation_name };
-
-         
-        let url ="{% comment %}  {% url 'getcardcode' %} {% endcomment %}"
-
-            fetch(url, {
-              method: "POST", // or 'PUT'
-              headers: {
-                "Content-Type": "application/json",
-                'X-CSRFToken': csrftoken
-              },
-              body: JSON.stringify(data),
-            })
-              .then((response) => response.json())
-
-              .then((data) => {
-                console.log("Success:", data);
-                card_field.innerHTML = '<option value= "" selected = "" >-----</option>'
-                for(let i = 0 ; i < data.length; i++ ){
-                    card_field.innerHTML += `<option value= " ${data[i]["card_code"]} " selected = "" >${data[i]["card_code"]}</option>`
-                }
-              })
-
-              .catch((error) => {
-                console.error("Error:", error);
-              });
-
-    }
-    
-
-</script> -->
 
 
 {% endblock javascripts %}

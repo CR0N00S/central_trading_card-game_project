@@ -17,8 +17,7 @@ urlpatterns = [
     # ADD NEW Routes HERE
     path('card/<str:pk>/',views.card_inf,name='card_inf'),
     path('nation/<str:pk>/',views.nation_card_req , name='nation_card_req'),
-    path('regis_card/',views.regis_card, name= 'regis_card'),
-    # path('get_cardcode' , views.get_cardcode,name= 'getcardcode'),
+
     path('regis_card_fill/<str:pk>/',views.get_card_info_before_regis, name= 'get_card_info_regis'),
     path('updata_sale_card/<str:pk>',views.update_sale ,name ='update_sale' ),
     path('delelte_card/<str:pk>',views.del_sale ,name ='del_sale' ),
