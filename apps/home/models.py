@@ -11,11 +11,11 @@ from apps.authentication.models import profile
 
 # Create your models here.
 
-class nation(models.Model):
-    nation = models.AutoField(primary_key=True)
-    nation = models.CharField(max_length=500)
-    def __str__(self):
-        return self.nation
+# class nation(models.Model):
+#     nation = models.AutoField(primary_key=True)
+#     nation = models.CharField(max_length=500)
+#     def __str__(self):
+#         return self.nation
 
 class nation_name(models.Model):
     nation_nam = models.CharField(primary_key=True,max_length=255)
@@ -42,17 +42,17 @@ class box_info(models.Model):
     def __str__(self):
         return self.bt_num + ' '+self.box_name
     
-class card_info (models.Model):
-    card_id = models.AutoField(primary_key=True)
-    # box_id = models.IntegerField(null=False)
-    card_name = models.CharField(max_length=500)
-    rarity_card = models.CharField(max_length=3)
-    # nation = models.CharField(max_length=500)
-    eff_card = models.CharField(max_length=500)
-    price_adv = models.IntegerField(null=False)
-    photo = models.ImageField(null=True , blank=True ,upload_to='card_img',default="ricado_mk2.jpg")
-    from_box = models.ForeignKey(box_info,null=True ,on_delete= models.SET_NULL )
-    from_nation = models.ForeignKey(nation,null=True ,on_delete= models.SET_NULL )
+# class card_info (models.Model):
+#     card_id = models.AutoField(primary_key=True)
+#     # box_id = models.IntegerField(null=False)
+#     card_name = models.CharField(max_length=500)
+#     rarity_card = models.CharField(max_length=3)
+#     # nation = models.CharField(max_length=500)
+#     eff_card = models.CharField(max_length=500)
+#     price_adv = models.IntegerField(null=False)
+#     photo = models.ImageField(null=True , blank=True ,upload_to='card_img',default="ricado_mk2.jpg")
+#     from_box = models.ForeignKey(box_info,null=True ,on_delete= models.SET_NULL )
+#     from_nation = models.ForeignKey(nation,null=True ,on_delete= models.SET_NULL )
 
 # class card_sale(models.Model):
 #     sale_id = models.AutoField(primary_key=True)
@@ -95,11 +95,11 @@ class CardWhoWantToSale (models.Model):
     saleId = models.UUIDField(default=uuid.uuid4 , unique=True ,primary_key=True , editable=False)
     cardFromNation = models.ForeignKey(nation_name,null=True,on_delete= models.SET_NULL)
     card_code = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
-    
-    # userWhoWantSale = models.ForeignKey(profile,null=True,on_delete= models.CASCADE)
     userNameWhoWantSale = models.CharField(max_length=100,null=True,editable=False)
-
     day_created =models.DateTimeField(auto_now_add=True)
     cardPhotoWhoWantSale = models.ImageField(null=True,upload_to='sale_photo/',default="no_infomation.png")
     sale_price = models.IntegerField(null=True,default=0)
     # card_code = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
+    # userWhoWantSale = models.ForeignKey(profile,null=True,on_delete= models.CASCADE)
+
+# class transa

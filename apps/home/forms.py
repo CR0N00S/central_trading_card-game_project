@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import nation_name ,card_infomation ,CardWhoWantToSale
+from .models import CardWhoWantToSale
 
 class subMit_form (forms.ModelForm):
     class Meta:

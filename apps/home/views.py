@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect , JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .models import nation,card_info,box_info,nation_name,card_infomation , card_info ,CardWhoWantToSale
+from .models import box_info,nation_name,card_infomation ,CardWhoWantToSale
 from django.shortcuts import render , redirect
 from .forms import * 
 # from django.core.exceptions import ObjectDoesNotExist
@@ -16,9 +16,9 @@ from .forms import *
 from django.contrib import messages
     
 
-data_db = card_info.objects.all()
-nation_all = nation.objects.all()
-card_info_test = card_info.objects.all()
+# data_db = card_info.objects.all()
+# nation_all = nation.objects.all()
+# card_info_test = card_info.objects.all()
 bt_test = box_info.objects.all()
 nation_al = nation_name.objects.all()
 
@@ -153,7 +153,7 @@ def del_sale(request,pk):
 def nation_card_req(request,pk):
     na_req = nation_name.objects.get(nation_nam=pk)
     card_fii = card_infomation.objects.filter(card_from_nation_id = na_req,)
-    context = { 'na_req' : na_req , 'card_fii' : card_fii ,'nation':nation_all, 'new_nation_req_all':nation_al}
+    context = { 'na_req' : na_req , 'card_fii' : card_fii , 'new_nation_req_all':nation_al}
     html_template = loader.get_template('home/Clan_page.html')
     return HttpResponse(html_template.render(context,request))
 
@@ -161,14 +161,14 @@ def nation_card_req(request,pk):
 
 # @login_required(login_url="/login/")
 def index(request):
-    context = {'segment': 'index','nation':nation_all , 'new_nation_req_all':nation_al}
+    context = {'segment': 'index',  'new_nation_req_all':nation_al}
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
 
 #@login_required(login_url="/login/")
 def pages(request):
-    context = {'data_db':data_db,'nation':nation_all,'card_info_test':card_info_test,
+    context = {
                'bt_te':bt_test ,}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
