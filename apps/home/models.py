@@ -86,7 +86,7 @@ class card_infomation (models.Model):
     fourth_effect_card = models.CharField(max_length=500,null=True,blank=True)
     fifth_effect_card = models.CharField(max_length=500,null=True,blank=True)
     card_from_nation = models.ForeignKey(nation_name,null=True,on_delete= models.SET_NULL)
-    price_average = models.IntegerField(null=False)
+    price_average = models.IntegerField(null=False,default=0,blank=True)
     card_photo = models.ImageField(null=True , blank=True ,upload_to='card_img',default="no_infomation.png")
     def __str__(self):
         return self.card_code +' '+self.card_name_new
@@ -106,11 +106,12 @@ class CardWhoWantToSale (models.Model):
 
 class transaction_table (models.Model):
     transaction_id = models.UUIDField(default=uuid.uuid4 , unique=True ,primary_key=True , editable=False)
-    fromSalerUser = models.CharField(max_length=100,null=True,blank=True)
-    toBuyerUser = models.CharField(max_length=100,null=True,blank=True)
+    fromSalerUser = models.CharField(max_length=100,null=True,blank=True) # คนตั้งขายคือใคร
+    toBuyerUser = models.CharField(max_length=100,null=True,blank=True) # คนซื้อคือใคร
     buyerAddr = models.CharField(max_length=500,null=True,blank=True)
     buyerPhone = models.CharField(max_length=10, null=True,blank=True)
     saleDay =models.DateTimeField(auto_now_add=True)
     card_code = models.CharField(max_length=500,null=True,blank=True)
+    price_detal = models.IntegerField(null=False,default=0,blank=True)
 
     # saleRateing = models.IntegerField()

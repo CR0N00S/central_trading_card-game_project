@@ -22,6 +22,7 @@ urlpatterns = [
     path('updata_sale_card/<str:pk>',views.update_sale ,name ='update_sale' ),
     path('delelte_card/<str:pk>',views.del_sale ,name ='del_sale' ),
     path( 'sale_confirm/<str:pk>',views.saleConfirm , name='saleConfirm'  ),
+    path('sale_history',views.saleHistory, name = 'saleHistory' ),
     
     
     # Leave `Home.Urls` as last the last line

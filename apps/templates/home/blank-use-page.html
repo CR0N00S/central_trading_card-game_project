@@ -1,0 +1,140 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page Blank {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Sample Page</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="javascript:">Sample Page</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>sale table ควรจะบอกว่าขายอยู่</h5>
+                                        </div>
+                                        <div class="card-block">
+
+
+                                            {% if sale_history.exists %}
+
+                                            <table style="width: 100%; font-size: 120%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>วันที่ขาย</th>
+                                                        <th>ราคา</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for his in  sale_history %}
+                                                        <tr>
+                                                            <td>{{his.day_created}}</td>
+                                                            <td>{{his.sale_price}}</td>
+                                                            <td>
+                                                                <a href="{% url 'update_sale' his.saleId %}">
+                                                                    <input type="button" class="btn btn-primary" value="Edit?">
+                                                                </a>
+                                                                <a href="{% url 'del_sale' his.saleId %}">
+                                                                    <input type="button" class="btn btn-danger" value="Delete?">
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            {% else %}
+                                                <h1>คุณยังไม่ได้ขายอะไรในตอนนี้</h1>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <!-- [ Main Content ] end -->
+
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>buy table ควรจะบอกว่าเราซื้ออะไรมา</h5>
+                                        </div>
+                                        <div class="card-block">
+
+
+                                                
+                                            {% if allTable.exists %}
+
+                                                
+                                            <table style="width: 100%; font-size: 120%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>วันที่ซื้อ</th>
+                                                        <th>ผู้ซื้อมา</th>
+                                                        <th>ราคา</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for all in  allTable %}
+                                                        <tr>
+
+                                                            <td>{{all.transaction_id}}</td>
+                                                            <td>{{all.saleDay}}</td>
+                                                            <td>{{all.toBuyerUser}}</td>
+                                                            <td>{{all.price_detal}}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+
+                                            {%else%}    
+                                                <h1>คุณยังไม่เคยซื้ออะไรในตอนนี้</h1>
+                                            {% endif %}
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

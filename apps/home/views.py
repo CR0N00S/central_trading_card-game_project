@@ -115,34 +115,67 @@ def del_sale(request,pk):
     html_template = loader.get_template('home/card-submit-page.html')
     return HttpResponse(html_template.render(context,request))
 
-
+@login_required(login_url="/login_new/")
 def saleConfirm(request,pk):
     buy_form = transaction_submit()
     saleSearch = CardWhoWantToSale.objects.get(saleId = pk)
+    what_price = saleSearch.sale_price
     from_user =  saleSearch.userNameWhoWantSale
     to_user = request.user.username
     what_card = saleSearch.card_code_id
     buyer_addr = request.user.profile.address
     phone_num = request.user.profile.phone
+    price_update = card_infomation.objects.get(card_code = what_card)
+    print('test', what_price)
+    # print('ggez' , price_update.price_average)
 
     if request.method == 'POST':
         
         buy_form = transaction_submit(request.POST)
-        
+        change_avd = change_price_adv(request.POST,instance=price_update)
+        # print('pass?',change_avd)
         if buy_form.is_valid():
             buy=buy_form.save(commit=False)
+            adv =change_avd.save(commit=False)
             buy.fromSalerUser = from_user
             buy.toBuyerUser = to_user
             buy.buyerAddr = buyer_addr
             buy.buyerPhone = phone_num
             buy.card_code = what_card
+            buy.price_detal= what_price
+            adv.price_average = what_price
             print('ez')
             buy_form.save()
+            adv.save()
             saleSearch.delete()
             return redirect('/')
     
     context={}
     html_template = loader.get_template('home/card-submit-page.html')
+    return HttpResponse(html_template.render(context,request))
+
+
+
+def saleHistory(request):
+
+    current_user = request.user.username
+    sale_his = CardWhoWantToSale
+    transec_allTable = transaction_table
+    
+    try:
+        sale_his = CardWhoWantToSale.objects.filter(userNameWhoWantSale = current_user)
+    except sale_his.DoesNotExist:
+        sale_his = None
+
+
+    try:
+        transec_allTable = transaction_table.objects.filter(toBuyerUser = current_user)
+    except transec_allTable.DoesNotExist:
+        transec_allTable = None
+
+
+    context = { 'current_user' : current_user , 'allTable' : transec_allTable ,'sale_history' : sale_his}
+    html_template = loader.get_template('home/blank-use-page.html')
     return HttpResponse(html_template.render(context,request))
 
 
@@ -153,6 +186,9 @@ def nation_card_req(request,pk):
     context = { 'na_req' : na_req , 'card_fii' : card_fii , 'new_nation_req_all':nation_al}
     html_template = loader.get_template('home/Clan_page.html')
     return HttpResponse(html_template.render(context,request))
+
+
+
 
     
 
