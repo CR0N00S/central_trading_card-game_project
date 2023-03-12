@@ -8,10 +8,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect , JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .models import box_info,nation_name,card_infomation ,CardWhoWantToSale , transaction_table 
+from .models import box_info,nation_name,card_infomation ,CardWhoWantToSale , transaction_table ,Rating
 from django.shortcuts import render , redirect
 from .forms import * 
 from apps.authentication.models import profile
+from django.db.models import Avg
+
 
 # from django.core.exceptions import ObjectDoesNotExist
 # import json
@@ -23,6 +25,7 @@ from django.contrib import messages
 # card_info_test = card_info.objects.all()
 bt_test = box_info.objects.all()
 nation_al = nation_name.objects.all()
+
 
 # card_filter = card_info.objects.all().filter(nation = 'gay_ray')
 
@@ -65,13 +68,18 @@ def card_inf(request,pk):
     inf = card_infomation.objects.get(card_code=pk)
     sale_filter = CardWhoWantToSale
     your_profile = request.user.username
+
+
     try:
         sale_filter = CardWhoWantToSale.objects.filter(card_code_id = pk)
     except sale_filter.DoesNotExist:
         sale_filter = None
     # print(sale_filter)
     
-    context = {'infomat': inf,'new_nation_req_all':nation_al , 'sale_filter' :sale_filter ,'your_profile' : your_profile}
+    
+
+
+    context = {'infomat': inf,'new_nation_req_all':nation_al , 'sale_filter' :sale_filter ,'your_profile' : your_profile }
     html_template = loader.get_template('home/Card&deck_info.html')
     return HttpResponse(html_template.render(context,request))
 
@@ -112,7 +120,7 @@ def del_sale(request,pk):
         find_del_sale.delete()
         return redirect('/')
     context={}
-    html_template = loader.get_template('home/card-submit-page.html')
+    html_template = loader.get_template('home/checking_page.html')
     return HttpResponse(html_template.render(context,request))
 
 @login_required(login_url="/login_new/")
@@ -238,14 +246,17 @@ def nation_card_req(request,pk):
 
 # @login_required(login_url="/login/")
 def index(request):
-    context = {'segment': 'index',  'new_nation_req_all':nation_al}
+    you_rating = Rating.objects.filter( rateUser = request.user.username).aggregate(Avg('rate'))
+    context = {'segment': 'index',  'new_nation_req_all':nation_al,'you_rating':you_rating}
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
 
 #@login_required(login_url="/login/")
 def pages(request):
-    context = {'bt_te':bt_test ,}
+    you_rating = Rating.objects.filter( rateUser = request.user.username).aggregate(Avg('rate'))
+
+    context = {'bt_te':bt_test ,'new_nation_req_all':nation_al,'you_rating':you_rating}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     # try:
