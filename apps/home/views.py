@@ -75,10 +75,6 @@ def card_inf(request,pk):
     except sale_filter.DoesNotExist:
         sale_filter = None
     # print(sale_filter)
-    
-    
-
-
     context = {'infomat': inf,'new_nation_req_all':nation_al , 'sale_filter' :sale_filter ,'your_profile' : your_profile }
     html_template = loader.get_template('home/Card&deck_info.html')
     return HttpResponse(html_template.render(context,request))
@@ -111,6 +107,17 @@ def update_sale(request,pk):
     context={'form' : form , 'upper' : upper , 'lower' : lower , 'card_price_search': card_price_search.price_average }
     html_template = loader.get_template('home/card-submit-page.html')
     return HttpResponse(html_template.render(context,request))
+
+def checkRate(request,pk):
+    checkuser = pk
+    user_rating = Rating.objects.filter( rateUser = pk).aggregate(Avg('rate'))
+    user_history = transaction_table.objects.filter(fromSalerUser = pk)
+    ratefilter = Rating.objects.filter( rateUser = pk)
+    context = {'user_rating' :user_rating ,'user_history':user_history,'checkuser':checkuser ,'ratefilter':ratefilter}
+    html_template = loader.get_template('home/user_rating.html')
+    return HttpResponse(html_template.render(context,request))
+
+
 
 
 @login_required(login_url="/login_new/")

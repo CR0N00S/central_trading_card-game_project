@@ -130,9 +130,9 @@
                                                     {% for sale_fill in sale_filter %}
                                                         <tr>
                                                             <td>{{ sale_fill.day_created }}</td>
-                                                            <td>{{ sale_fill.userNameWhoWantSale }}</td>
+                                                            <td><a href="{% url 'check_rate' sale_fill.userNameWhoWantSale %}" class="btn btn-link" data-toggle="tooltip" data-original-title="เชค rating ของคุณ {{sale_fill.userNameWhoWantSale}}" >{{ sale_fill.userNameWhoWantSale }}</a></td>
                                                             <td>{{ sale_fill.sale_price }}</td>
-                                                            
+                                                             
                                                             {% if your_profile == sale_fill.userNameWhoWantSale %}
 
                                                             <td>

@@ -24,6 +24,7 @@ urlpatterns = [
     path( 'sale_confirm/<str:pk>',views.saleConfirm , name='saleConfirm'  ),
     path('sale_history',views.saleHistory, name = 'saleHistory' ),
     path('rate/<str:pk>',views.rateThis, name = 'rateThis'),
+    path('check/<str:pk>',views.checkRate, name = 'check_rate'),
 
     
     
