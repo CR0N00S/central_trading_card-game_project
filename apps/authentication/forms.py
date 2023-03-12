@@ -74,9 +74,24 @@ class CustomCreatForm(UserCreationForm):
     #     for name,field in self.fields.items():
     #         field.widget.attrs.update({'class':'input'})
 
-# class AnotherForm(forms.ModelForm):
+class AnotherForm(forms.ModelForm):
+    class Meta:
+        model = profile
+        fields = ['phone']
+        labels = {'phone': 'เบอร์โทร'}
+    
+
+# class profileUpdate_blank(UserCreationForm):
 #     class Meta:
-#         model = profile
-#         fields = ['phone']
-#         labels = {'phone': 'เบอร์โทร'}
+#         model = User
+#         fields = ['first_name' ,'last_name' ]
+#         labels = { 'first_name' :  'ชื่อ' , 'last_name': 'นามสกุล'}
+
+
+class profileUpdate_blank_addr(UserCreationForm):
+    class Meta:
+        model = profile
+        fields = ['address' ]
+        labels = { 'address' :  'ที่อยู่'}
+
     

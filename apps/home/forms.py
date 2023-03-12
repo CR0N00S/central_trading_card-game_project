@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import CardWhoWantToSale,transaction_table,card_infomation
+from .models import CardWhoWantToSale,transaction_table,card_infomation ,Rating
 
 class subMit_form (forms.ModelForm):
     class Meta:
@@ -27,9 +27,24 @@ class transaction_submit (forms.ModelForm):
         fields = "__all__"
         # fields = ['fromSalerUser','toBuyerUser','buyerAddr','buyerPhone','card_code']
 
+
+
+
 class change_price_adv (forms.ModelForm):
     class Meta:
         model = card_infomation
         fields = ['price_average']
 
 
+
+class rate_this (forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = ['rate','rateTxt']
+
+
+
+class transactionGoTrue (forms.ModelForm):
+    class Meta:
+        model = transaction_table
+        fields = ['is_rate']

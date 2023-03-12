@@ -113,5 +113,23 @@ class transaction_table (models.Model):
     saleDay =models.DateTimeField(auto_now_add=True)
     card_code = models.CharField(max_length=500,null=True,blank=True)
     price_detal = models.IntegerField(null=False,default=0,blank=True)
+    is_rate = models.BooleanField(default=False)
 
     # saleRateing = models.IntegerField()
+
+
+class Rating (models.Model):
+    Rate_choice =(
+        (1,'1'),
+        (2,'2'),
+        (3,'3'),
+        (4,'4'),
+        (5,'5')
+    )
+    userWhoRateThis = models.CharField(max_length=100,null=True,blank=True) # คนที่ rate ให้
+    rateUser = models.CharField(max_length=100,null=True,blank=True) # คนที่ถูก rate
+    rating_product = models.ForeignKey(transaction_table,null=True,on_delete= models.CASCADE)
+    rate = models.IntegerField(choices=Rate_choice)
+    rateTxt = models.CharField(max_length=200,null=True,blank=True)
+    rating_day = models.DateTimeField(auto_now_add=True)
+    rate_id = models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)

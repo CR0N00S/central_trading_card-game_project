@@ -97,7 +97,7 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>วันที่ซื้อ</th>
-                                                        <th>ผู้ซื้อมา</th>
+                                                        <th>ซื้อมาจาก</th>
                                                         <th>ราคา</th>
                                                         <th></th>
                                                     </tr>
@@ -108,8 +108,23 @@
 
                                                             <td>{{all.transaction_id}}</td>
                                                             <td>{{all.saleDay}}</td>
-                                                            <td>{{all.toBuyerUser}}</td>
+                                                            <td>{{all.fromSalerUser}}</td>
                                                             <td>{{all.price_detal}}</td>
+                                                            <td>
+                                                                {%if all.is_rate == True %}
+
+                                                                    {%for rating in rate_check %}
+                                                                        {% if all.transaction_id == rating.rating_product_id %}
+                                                                            คะแนนที่คุณให้คือ {{rating.rate}}/5
+                                                                        {% endif%}
+                                                                    {% endfor %}
+
+
+                                                                {%else%}
+
+                                                                <a href="{% url 'rateThis' all.transaction_id %}"><input type="button" value="rate this"></a> 
+                                                                {% endif %}
+                                                            </td>
                                                         </tr>
                                                     {% endfor %}
                                                 </tbody>

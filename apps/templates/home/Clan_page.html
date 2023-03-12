@@ -39,38 +39,28 @@
                                             <h5>Central Trading Cardgame</h5>
                                         </div>
                                         <div class="card-block">
-                                            <div class="row">
-                                                <div class="column" style="width: 50%;">
+
                                                   <h2>Sale?</h2>
                                                   
                                                     {% for card_filter_nation in card_fii %}
                                                     
-                                                        <div style="float: left;width: 30%;padding: 10px;height: 420px; border: 5px ;border-style: solid;margin: 5px;
+                                                        <div style="float: left;padding: 10px;height: 380px;width: 350px ; border: 5px ;border-style: solid;margin: 5px;
                                                             border-radius: 20px;">
                                                             <center>
                                                                 <a href="{% url 'card_inf' card_filter_nation.card_code %}">
                                                                 <img src ="/static/assets/img_upload{{card_filter_nation.card_photo.url}}" alt="{{card_filter_nation.card_name_new.url}}" 
-                                                            style="width: 95%;">
+                                                            style="width: 50%;">
                                                                 </a>
                                                             </center>
                                                             <center>{{card_filter_nation.card_code}}</center>
-                                                            <center>{{card_filter_nation.card_name_new}}</center>   
+                                                            <center>{{card_filter_nation.card_name_new}}</center> 
                                                             <center><a href="{% url 'card_inf' card_filter_nation.card_code %}"><button type="button" class="btn btn-outline-danger" 
-                                                            title="" data-toggle="tooltip" 
-                                                            data-original-title="btn btn-outline-danger">Buy it!!!</button></a></center>
+                                                            title="{{card_filter_nation.price_average}} บาท" data-toggle="tooltip" 
+                                                            >Buy it!!!</button></a></center>
                                                             
                                                         </div>
                                                     {% endfor %}
-                                                    
 
-                                                </div>
-                                                <div class="column" style="width: 50%;">
-                                                  <h2>auction?</h2>
-                                                  <p>Test</p>
-                                                    card
-                                                    
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

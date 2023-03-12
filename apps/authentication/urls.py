@@ -14,6 +14,8 @@ urlpatterns = [
     path('login_new/',views.login_page, name= 'login_form'),
     path('register_new/',views.register_page, name= 'register_form') , 
     path('logout_new/',views.logoutUser, name= 'logout_fo'),
+    # path('profile/',views.profile, name = 'profile' ),
+    # path('profile/<str:pk>',views.profile_before, name = 'profile_before' ),
 
     
     path('login/', login_view, name="login"),

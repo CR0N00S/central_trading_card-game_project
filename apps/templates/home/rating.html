@@ -18,11 +18,11 @@
                             <div class="row align-items-center">
                                 <div class="col-md-12">
                                     <div class="page-header-title">
-                                        <!-- <h5 class="m-b-10">Sample Page</h5> -->
+                                        <h5 class="m-b-10">Sample Page</h5>
                                     </div>
                                     <ul class="breadcrumb">
-                                        <!-- <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:">Sample Page</a></li> -->
+                                        <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="javascript:">Sample Page</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -36,23 +36,28 @@
                                 <div class="col-sm-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>check</h5>
+                                            <h5>Hello card It me mario</h5>
                                         </div>
                                         <div class="card-block">
-                                          <center>  <h1>are you sure you want to do this?</h1> </center>
-                                        <form method="POST">
-                                            <center>
-                                                {%csrf_token%}
-                                                <input type="submit" value="Yes">
-                                        </form>
-                                                <a href="/">
-                                                <input type="button" value="no">
-                                                </a>
-                                            </center>
+                                            <p>rate this?</p>
+                                            <div>
+                                                <form method="post">
+
+                                                    {%csrf_token%}
+                                                    {{rate_form.as_p}}
+                                                    <input type="submit" class="btn btn-primary shadow-2 mb-4" value="Submit Rating">
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                               
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-block">    
+                                                  
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- [ Main Content ] end -->
                         </div>
@@ -66,4 +71,7 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    
+
+{% endblock javascripts %}

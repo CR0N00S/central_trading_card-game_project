@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect , JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .models import box_info,nation_name,card_infomation ,CardWhoWantToSale , transaction_table
+from .models import box_info,nation_name,card_infomation ,CardWhoWantToSale , transaction_table 
 from django.shortcuts import render , redirect
 from .forms import * 
 from apps.authentication.models import profile
@@ -126,15 +126,35 @@ def saleConfirm(request,pk):
     buyer_addr = request.user.profile.address
     phone_num = request.user.profile.phone
     price_update = card_infomation.objects.get(card_code = what_card)
-    print('test', what_price)
+    firstname = request.user.profile.name
+    surname = request.user.profile.surname
+    # print('test', what_price)
     # print('ggez' , price_update.price_average)
-
-    if request.method == 'POST':
+    if(phone_num == None or buyer_addr is exit or firstname is exit or surname is exit):
+        print('firstname =', request.user.profile.name)
+        print('phone =',phone_num)
+        print('addr = ', buyer_addr)
+        # print('shame')
+        # return redirect('/')
         
-        buy_form = transaction_submit(request.POST)
-        change_avd = change_price_adv(request.POST,instance=price_update)
-        # print('pass?',change_avd)
-        if buy_form.is_valid():
+        context={}
+        html_template = loader.get_template('home/profile.html')
+        return HttpResponse(html_template.render(context,request))
+
+    else:
+        if request.method == 'POST':
+        
+            buy_form = transaction_submit(request.POST)
+            change_avd = change_price_adv(request.POST,instance=price_update)
+            # print('pass?',change_avd)
+            # if buy_form.is_valid():
+            #     if(phone_num == None or buyer_addr is exit or firstname is exit or surname is exit):
+            #         print('firstname =', request.user.profile.name)
+            #         print('phone =',phone_num)
+            #         print('addr = ', buyer_addr)
+            #         print('shame')
+            #     else:    
+            #         print('out')
             buy=buy_form.save(commit=False)
             adv =change_avd.save(commit=False)
             buy.fromSalerUser = from_user
@@ -144,16 +164,15 @@ def saleConfirm(request,pk):
             buy.card_code = what_card
             buy.price_detal= what_price
             adv.price_average = what_price
-            print('ez')
+            # print('ez')
             buy_form.save()
             adv.save()
             saleSearch.delete()
             return redirect('/')
     
     context={}
-    html_template = loader.get_template('home/card-submit-page.html')
+    html_template = loader.get_template('home/checking_page.html')
     return HttpResponse(html_template.render(context,request))
-
 
 
 def saleHistory(request):
@@ -161,7 +180,7 @@ def saleHistory(request):
     current_user = request.user.username
     sale_his = CardWhoWantToSale
     transec_allTable = transaction_table
-    
+    rate_check = Rating.objects.all()
     try:
         sale_his = CardWhoWantToSale.objects.filter(userNameWhoWantSale = current_user)
     except sale_his.DoesNotExist:
@@ -174,8 +193,33 @@ def saleHistory(request):
         transec_allTable = None
 
 
-    context = { 'current_user' : current_user , 'allTable' : transec_allTable ,'sale_history' : sale_his}
-    html_template = loader.get_template('home/blank-use-page.html')
+    context = { 'current_user' : current_user , 'allTable' : transec_allTable ,'sale_history' : sale_his , 'rate_check':rate_check}
+    html_template = loader.get_template('home/salehistorypage.html')
+    return HttpResponse(html_template.render(context,request))
+
+def rateThis(request,pk):
+    getTransection = transaction_table.objects.get(transaction_id = pk)
+    rate_form = rate_this()
+    if request.method == 'POST':
+        rate_form = rate_this(request.POST)
+        update_transection = transactionGoTrue(request.POST,instance = getTransection)
+        print('it out')
+        if rate_form.is_valid():
+            rating_form = rate_form.save(commit=False)
+            tran_up=update_transection.save(commit=False)
+            rating_form.rating_product = getTransection
+            rating_form.rateUser = getTransection.fromSalerUser
+            rating_form.userWhoRateThis = request.user.username
+            tran_up.is_rate = True
+            tran_up.save()
+            rating_form.save()
+            return redirect('/')
+        else:
+            print('no')
+
+
+    context = {'getTransection':getTransection ,'rate_form':rate_form}
+    html_template = loader.get_template('home/rating.html')
     return HttpResponse(html_template.render(context,request))
 
 
@@ -201,8 +245,7 @@ def index(request):
 
 #@login_required(login_url="/login/")
 def pages(request):
-    context = {
-               'bt_te':bt_test ,}
+    context = {'bt_te':bt_test ,}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     # try:
