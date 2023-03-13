@@ -16,6 +16,7 @@ urlpatterns = [
     path('logout_new/',views.logoutUser, name= 'logout_fo'),
     # path('profile/',views.profile, name = 'profile' ),
     # path('profile/<str:pk>',views.profile_before, name = 'profile_before' ),
+    path('edit_accout/' ,views.editAccout,name = 'editAccout'),
 
     
     path('login/', login_view, name="login"),

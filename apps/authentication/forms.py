@@ -61,6 +61,8 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 
+
+
 class CustomCreatForm(UserCreationForm):
     class Meta:
         model = User
@@ -69,10 +71,11 @@ class CustomCreatForm(UserCreationForm):
 
         }
 
-    # def __init__(self,*args,**kwargs):
-    #     super(CustomCreatForm ,self).__init__(*args,**kwargs)
-    #     for name,field in self.fields.items():
-    #         field.widget.attrs.update({'class':'input'})
+    def __init__(self,*args,**kwargs):
+        super(CustomCreatForm ,self).__init__(*args,**kwargs)
+        for name,field in self.fields.items():
+            field.widget.attrs.update({'class':'form-control'})
+
 
 class AnotherForm(forms.ModelForm):
     class Meta:
@@ -81,11 +84,17 @@ class AnotherForm(forms.ModelForm):
         labels = {'phone': 'เบอร์โทร'}
     
 
-# class profileUpdate_blank(UserCreationForm):
-#     class Meta:
-#         model = User
-#         fields = ['first_name' ,'last_name' ]
-#         labels = { 'first_name' :  'ชื่อ' , 'last_name': 'นามสกุล'}
+class profileEdit(UserCreationForm):
+    class Meta:
+        model = profile
+        # fields = "__all__"
+        fields = ['name' ,'surname' , 'phone'  ,'address' , ]
+        labels = { 'name' :  'ชื่อ' , 'surname': 'นามสกุล','phone':'เบอร์โทร', 'ที่อยู่':'address'}
+        # def __init__ (self, *args, **kwargs):
+        #     super(profileEdit,self).__init__(*args, **kwargs)
+        #     #remove what you like...
+        #     self.fields.pop ('password1')
+        #     self.fields.pop ('password2')
 
 
 class profileUpdate_blank_addr(UserCreationForm):
@@ -93,5 +102,5 @@ class profileUpdate_blank_addr(UserCreationForm):
         model = profile
         fields = ['address' ]
         labels = { 'address' :  'ที่อยู่'}
-
+    
     

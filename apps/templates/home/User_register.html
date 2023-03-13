@@ -23,8 +23,23 @@
 
                     <form method="POST">
                         {%csrf_token%}
-                        <center>{{form.as_p}}</center>
-                        <center>{{phone_form.as_p}}</center>
+
+                        {% for field in form %}
+                            <div>
+                                <label for="formInput#text" style="padding-top: 5px;">{{field.label}}</label>
+                                <div>{{field}}</div>
+                                {% if field.help_text %}
+                                <small>{{field.help_text}}</small>
+                                {% endif %}
+
+                                {% for error in field.errors %}
+                                <p style="color: red;" >{{error}}</p>
+                                {% endfor %}
+
+                            </div>
+                        {% endfor %}
+
+                        
                         <input type="submit" class="btn btn-primary shadow-2 mb-4" value="Sign up">
                     </form>
                     

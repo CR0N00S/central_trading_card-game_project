@@ -123,11 +123,6 @@
                             </div>
                             <ul class="pro-body">
                                 
-
-                                    
-                                <li><a href="{% url 'saleHistory' %}" class="dropdown-item"><i class="feather icon-user"></i>
-                                   Sale history</a></li>
-
                                 {% if request.user.profile.phone == None or request.user.profile.address is exit or request.user.profile.name is exit or request.user.profile.surname is exit %}
 
                                     <li><a href="/profile.html" class="dropdown-item"><i class="feather icon-user"></i>
@@ -136,6 +131,11 @@
                                     <li><a href="/profile.html" class="dropdown-item"><i class="feather icon-user"></i>
                                         Profile</a></li>
                                 {% endif %}
+                                    
+                                <li><a href="{% url 'saleHistory' %}" class="dropdown-item"><i class="feather icon-user"></i>
+                                   Sale history</a></li>
+
+                                
 
                                 <li><a href="{% url 'logout_fo' %}" class="dropdown-item">
                                     <i class="feather icon-lock"></i> Logout</a>

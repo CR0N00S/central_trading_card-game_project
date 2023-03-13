@@ -12,7 +12,7 @@ from django.contrib import messages
 from .forms import LoginForm, SignUpForm
 from core.settings import GITHUB_AUTH
 from .models import profile
-from .forms import CustomCreatForm ,profileUpdate_blank_addr,AnotherForm
+from .forms import CustomCreatForm ,profileEdit,profileUpdate_blank_addr,AnotherForm
 from django.http import HttpResponse
 from django.template import loader
 
@@ -93,6 +93,23 @@ def register_page(request):
 #     html_template = loader.get_template('home/profile.html')
 #     return HttpResponse(html_template.render(context,request))
 
+
+def editAccout (request):
+    curr_user = request.user
+    print(curr_user)
+    update_form = profileEdit(instance = curr_user)
+
+    if request.method == 'POST':
+        
+        update_form = profileEdit(request.POST , instance = curr_user)
+        
+
+        if update_form.is_valid() :
+            print('pass')
+
+    context = { 'update_form':update_form}
+    html_template = loader.get_template('home/profile.html')
+    return HttpResponse(html_template.render(context,request))
 
 
 def logoutUser(request):

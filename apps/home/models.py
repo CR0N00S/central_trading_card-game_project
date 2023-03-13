@@ -23,24 +23,24 @@ class nation_name(models.Model):
     def __str__(self):
         return self.nation_nam
 
-class box_infromation(models.Model):
-    box_code = models.CharField(primary_key=True,null=False,max_length=255)  
-    box_name_n = models.CharField(max_length=500,null=False)   
-    def __str__(self):
-        return self.box_code+ ' '+ self.box_name_n
+# class box_infromation(models.Model):
+#     box_code = models.CharField(primary_key=True,null=False,max_length=255)  
+#     box_name_n = models.CharField(max_length=500,null=False)   
+#     def __str__(self):
+#         return self.box_code+ ' '+ self.box_name_n
 
-class box_info(models.Model):
-    box_id = models.AutoField(primary_key=True)
-    bt_num = models.CharField(max_length=50,null=True)
-    box_name = models.CharField(max_length=500)
-    number_of_card = models.IntegerField(null=False)
-    num_rarity_c = models.IntegerField(null=False)
-    num_rarity_r = models.IntegerField(null=False)
-    num_rarity_rr = models.IntegerField(null=False)
-    num_rarity_rrr = models.IntegerField(null=False)
-    day_add = models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return self.bt_num + ' '+self.box_name
+# class box_info(models.Model):
+#     box_id = models.AutoField(primary_key=True)
+#     bt_num = models.CharField(max_length=50,null=True)
+#     box_name = models.CharField(max_length=500)
+#     number_of_card = models.IntegerField(null=False)
+#     num_rarity_c = models.IntegerField(null=False)
+#     num_rarity_r = models.IntegerField(null=False)
+#     num_rarity_rr = models.IntegerField(null=False)
+#     num_rarity_rrr = models.IntegerField(null=False)
+#     day_add = models.DateTimeField(auto_now_add=True)
+#     def __str__(self):
+#         return self.bt_num + ' '+self.box_name
     
 # class card_info (models.Model):
 #     card_id = models.AutoField(primary_key=True)
@@ -70,10 +70,10 @@ class box_info(models.Model):
 #     sale_day = models.DateTimeField(auto_now_add=True)
 #     price = models.IntegerField(null=False,default=0)
 
-class box_has_nation(models.Model):
-    b_h_n_id = models.AutoField(primary_key=True)
-    id_box = models.ForeignKey(box_infromation,null=True ,on_delete= models.SET_NULL)
-    has_nation = models.ForeignKey(nation_name,null=True ,on_delete= models.SET_NULL)
+# class box_has_nation(models.Model):
+#     b_h_n_id = models.AutoField(primary_key=True)
+#     id_box = models.ForeignKey(box_infromation,null=True ,on_delete= models.SET_NULL)
+#     has_nation = models.ForeignKey(nation_name,null=True ,on_delete= models.SET_NULL)
     
 
 class card_infomation (models.Model):
@@ -97,7 +97,7 @@ class CardWhoWantToSale (models.Model):
     card_code = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
     userNameWhoWantSale = models.CharField(max_length=100,null=True,editable=False)
     day_created =models.DateTimeField(auto_now_add=True)
-    cardPhotoWhoWantSale = models.ImageField(null=True,upload_to='sale_photo/',default="no_infomation.png")
+    cardPhotoWhoWantSale = models.ImageField(null=True,upload_to='sale_photo',default="no_infomation.png")
     sale_price = models.IntegerField(null=True,default=0)
     # card_code = models.ForeignKey(card_infomation,null=True,on_delete= models.SET_NULL)
     # userWhoWantSale = models.ForeignKey(profile,null=True,on_delete= models.CASCADE)

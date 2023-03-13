@@ -51,8 +51,13 @@
                                                             <!-- [Card Info Example] -->
 
                                                             
+                                                            
                                                             <div class="form-group" style="text-align: center;">
+                                                                
+                                                                <div>
                                                                 <img src="/static/assets/images/Card_explain.png" width="450" height="505">
+                                                                </div>
+                                                                
                                                             </div>
                                                             
 
@@ -71,16 +76,31 @@
                                                                 <p>คุณต้องการจะขาย {{cardYouWantToSale.card_code}} {{cardYouWantToSale.card_name_new}}</p>
                                                             </center>
                                                             <center>
+                                                            <div style="color: red;" >** reminder คุณต้องตั้งขายไม่มากว่าหรือน้อยกว่า 80% ของราคากลาง**</div>
                                                             <p>now avergae is {{card_price_search}}</p>
                                                             <p>now upper is {{upper}}</p>
                                                             <p>and lower is {{lower}} </p>
+                                                            
                                                             </center>
                                                             {% endif %}
 
                                                             
                                                             {%csrf_token%}
-                                                            <center>{{card_form.as_p}}</center>
-                                                            <center>{{form.as_p}}</center>
+
+                                                            {% for card_field in card_form %}
+                                                            <center>
+                                                                <label for="formInput#text" style="padding-top: 5px;">{{card_field.label}}</label>
+                                                                <div>{{card_field}}</div>
+                                                            </center>
+                                                            {% endfor %}
+                                                            
+                                                            {% for card_update in form %}
+                                                            <center>
+                                                                <label for="formInput#text" style="padding-top: 5px;">{{card_update.label}}</label>
+                                                                <div>{{card_update}}</div>
+                                                            </center>
+                                                            {% endfor %}
+                                                            
                                                             <center><input type="submit" class="btn btn-primary shadow-2 mb-4" value="Submit">
                                                             </center> 
                                                         </form>

@@ -27,6 +27,8 @@ class profile(models.Model):
     sale = models.CharField(max_length=50,choices= CUS_OR_SALE ,default='customer')
     user_photo = models.ImageField(null=True , blank=True ,upload_to='user_icon',default="icon-van.jpg")
     id = models.UUIDField(default=uuid.uuid4 , unique=True ,primary_key=True , editable=False)
+    # USERNAME_FIELD = "id"
+    
 
     def __str__(self):
         return str(self.user.username)
@@ -47,6 +49,13 @@ def profileCreate(sender,instance , created , **kwargs):
     print(instance)
     print(created)
 
+def updateUser(sender , instance , created , **kwargs):
+    profi = instance
+    user = profi.user
+    if created == False:
+        user.first_name = profi.name
+        user.last_name =profi.surname
+        user.save()
 
 def del_profile (sender,instance,**kwargs):
     user = instance.user
@@ -55,7 +64,7 @@ def del_profile (sender,instance,**kwargs):
 
 
 post_save.connect(profileCreate, sender=User)
-
+post_save.connect(updateUser,sender=profile)
 post_delete.connect(del_profile,sender=profile)
 
 

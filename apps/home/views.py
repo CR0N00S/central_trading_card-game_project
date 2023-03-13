@@ -3,12 +3,12 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from django import template
+# from django import template
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect , JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect 
 from django.template import loader
 from django.urls import reverse
-from .models import box_info,nation_name,card_infomation ,CardWhoWantToSale , transaction_table ,Rating
+from .models import nation_name,card_infomation ,CardWhoWantToSale , transaction_table ,Rating
 from django.shortcuts import render , redirect
 from .forms import * 
 from apps.authentication.models import profile
@@ -23,8 +23,9 @@ from django.contrib import messages
 # data_db = card_info.objects.all()
 # nation_all = nation.objects.all()
 # card_info_test = card_info.objects.all()
-bt_test = box_info.objects.all()
+# bt_test = box_info.objects.all()
 nation_al = nation_name.objects.all()
+saleAll = CardWhoWantToSale.objects.all()
 
 
 # card_filter = card_info.objects.all().filter(nation = 'gay_ray')
@@ -41,7 +42,7 @@ def get_card_info_before_regis(request,pk):
     upper = cardYouWantToSale.price_average +(cardYouWantToSale.price_average*0.2)
     lower = cardYouWantToSale.price_average - (cardYouWantToSale.price_average*0.2)
     if request.method == 'POST':
-        card_form = subMit_form(request.POST)
+        card_form = subMit_form(request.POST ,request.FILES)
         if card_form.is_valid():
             card_sub = card_form.save(commit=False)
             if card_sub.sale_price > cardYouWantToSale.price_average +(cardYouWantToSale.price_average*0.2) or card_sub.sale_price < cardYouWantToSale.price_average - (cardYouWantToSale.price_average*0.2) or card_sub.sale_price <= 0  :
@@ -265,12 +266,11 @@ def nation_card_req(request,pk):
 
 
 
-    
-
 # @login_required(login_url="/login/")
 def index(request):
     you_rating = Rating.objects.filter( rateUser = request.user.username).aggregate(Avg('rate'))
-    context = {'segment': 'index',  'new_nation_req_all':nation_al,'you_rating':you_rating}
+    saleAll = CardWhoWantToSale.objects.all().order_by('-day_created')
+    context = {'segment': 'index',  'new_nation_req_all':nation_al,'you_rating':you_rating , 'saleAll':saleAll}
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -279,7 +279,7 @@ def index(request):
 def pages(request):
     you_rating = Rating.objects.filter( rateUser = request.user.username).aggregate(Avg('rate'))
 
-    context = {'bt_te':bt_test ,'new_nation_req_all':nation_al,'you_rating':you_rating}
+    context = {'new_nation_req_all':nation_al,'you_rating':you_rating}
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     # try:

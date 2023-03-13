@@ -148,7 +148,9 @@
                                                         }
                                                     },
                                                     x: {
+                                                        
                                                         title:{
+                                                            
                                                             display : true,
                                                             text: 'วันที่ขาย'
                                                         }
@@ -161,28 +163,32 @@
                                         </div>
                                     {% endif %}
 
-                                    <div class="card" style="padding-left: 5%; padding-top: 1%; border-radius: 10px;">
+                                    <div class="card" style="padding-left: 5%; padding-top: 1%; border-radius: 10px;padding-right: 5%;">
                                         
                                        <div>
                                         {% if sale_filter.exists %}
 
-                                            <table style="width: 100%; font-size: 120%;">
+                                            <table class="table-hover"  style="width: 100%; font-size: 120%;">
                                                 <thead>
                                                     <tr>
+                                                        <th>รูป</th>
                                                         <th>วันที่ลงขาย</th>
                                                         <th>ผู้ขาย</th>
                                                         <th>ราคา</th>
+                                                        
                                                         <th></th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     {% for sale_fill in sale_filter %}
+                                                        
                                                         <tr>
+                                                            <td><img style="width: 10%;" class="hover-zoom" src="/static/assets/img_upload{{sale_fill.cardPhotoWhoWantSale.url}}"></td>
                                                             <td>{{ sale_fill.day_created }}</td>
                                                             <td><a href="{% url 'check_rate' sale_fill.userNameWhoWantSale %}" class="btn btn-link" data-toggle="tooltip" data-original-title="เชค rating ของคุณ {{sale_fill.userNameWhoWantSale}}" >{{ sale_fill.userNameWhoWantSale }}</a></td>
                                                             <td>{{ sale_fill.sale_price }}</td>
-                                                             
+                                                            
                                                             {% if your_profile == sale_fill.userNameWhoWantSale %}
 
                                                             <td>

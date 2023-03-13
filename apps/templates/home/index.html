@@ -103,25 +103,29 @@
                                             <div class="table-responsive">
                                                 <table class="table table-hover">
                                                     <tbody>
+                                                    {% for sale in saleAll %}
                                                     <tr class="unread">
                                                         <td><img class="rounded-circle" style="width:40px;"
                                                                     src="{{ ASSETS_ROOT }}/images/user/avatar-1.jpg" alt="activity-user">
                                                         </td>
                                                         <td>
-                                                            <h6 class="mb-1">Isabella Christensen</h6>
-                                                            <p class="m-0">Lorem Ipsum is simply…</p>
+                                                            {{sale.card_code_id}}
+                                                        </td>
+                                                        <td>
+                                                            <h6 class="mb-1">{{sale.userNameWhoWantSale}}</h6>
+                                                            <p class="m-0">{{sale.sale_price}}</p>
                                                         </td>
                                                         <td>
                                                             <h6 class="text-muted"><i
-                                                                    class="fas fa-circle text-c-green f-10 m-r-15"></i>11
-                                                                MAY 12:56</h6>
+                                                                    class="fas fa-circle text-c-green f-10 m-r-15"></i>{{sale.day_created}}</h6>
                                                         </td>
-                                                        <td><a href="#!"
-                                                                class="label theme-bg2 text-white f-12">Reject</a><a
-                                                                href="#!" class="label theme-bg text-white f-12">Approve</a>
+                                                        <td>
+                                                                {% if user.username != sale.userNameWhoWantSale %}
+                                                                <a href="{% url 'card_inf' sale.card_code_id %}" class="label theme-bg text-white f-12">View that now!!!</a>
+                                                                {% endif %}
                                                         </td>
                                                     </tr>
-                                                    
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -147,7 +151,7 @@
                                             <i class="fab fa-angellist text-c-purple f-50"></i>
                                         </div>
                                     </div>
-                                    <div class="card">
+                                    <!-- <div class="card">
                                         <div class="card-block border-bottom">
                                             <div class="row d-flex align-items-center">
                                                 <div class="col-auto">
@@ -170,7 +174,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- [ statistics year chart ] end -->
                                 <!--[social-media section] start-->

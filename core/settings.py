@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
 AUTH_PROFILE_MODULE = 'models.profile'
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',

@@ -8,6 +8,14 @@ class subMit_form (forms.ModelForm):
         # fields = "__all__"
         fields = ['sale_price','cardPhotoWhoWantSale']
         labels = {'cardPhotoWhoWantSale':'รูปการ์ด','sale_price':'ราคาที่ต้องการขาย'}
+        
+    def __init__(self,*args,**kwargs):
+        super(subMit_form ,self).__init__(*args,**kwargs)
+        for name,field in self.fields.items():
+            field.widget.attrs.update({'class':'form-control'})
+
+
+    
 
     # def __init__(self , *args , **kwargs):
     #     super().__init__(*args , **kwargs)
@@ -19,6 +27,11 @@ class subMit_update_form (forms.ModelForm):
         # fields = "__all__"
         fields = ['sale_price']
         labels = {'sale_price':'ราคาที่ต้องการจะตั้ง'}
+    def __init__(self,*args,**kwargs):
+        super(subMit_update_form ,self).__init__(*args,**kwargs)
+        for name,field in self.fields.items():
+            field.widget.attrs.update({'class':'form-control'})
+
 
 
 class transaction_submit (forms.ModelForm):
