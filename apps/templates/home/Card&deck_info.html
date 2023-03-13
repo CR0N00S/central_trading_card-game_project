@@ -117,7 +117,7 @@
                                         </div>
                                         
                                         {% else %}
-                                        <div class="card" style="padding-left: 5%; padding-top: 1%; border-radius: 10px;">
+                                        <div class="card" style="padding-left: 5%; padding-top: 2%;padding-right: 5%; border-radius: 10px; ">
 
                                             <div>
                                                 <canvas id="myChart"></canvas>
@@ -135,16 +135,27 @@
                                                     datasets: [{
                                                     label: 'ราคาที่เคยขายไป',
                                                     data: {{sale_data|safe}},
-                                                    borderWidth: 1
+                                                    borderWidth: 5
                                                     }]
                                                 },
                                                 options: {
                                                     scales: {
                                                     y: {
-                                                        beginAtZero: true
+                                                        beginAtZero: true,
+                                                        title:{
+                                                            display : true,
+                                                            text: 'ราคาที่ขาย'
+                                                        }
+                                                    },
+                                                    x: {
+                                                        title:{
+                                                            display : true,
+                                                            text: 'วันที่ขาย'
+                                                        }
                                                     }
+
                                                     }
-                                                }
+                                                },
                                                 });
                                             </script>
                                         </div>
@@ -200,16 +211,6 @@
                                     </div> 
                
                                     </div>
-                                    
-                                    
-                                    {%for test in queryset%}
-                                        <p>{{test.saleDay| date:"F d Y"}}</p>
-                                    {% endfor %}
-                                    <p>{{queryset.saleDay}}</p>
-                                    <p>{{day_labels}}</p>
-                                    <p>{{sale_data}}</p>
-
-                                    
                                 </div>
                                 
                             </div>
