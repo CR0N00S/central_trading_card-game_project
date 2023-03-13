@@ -111,6 +111,45 @@
                                         </div>
                                     </div>
 
+                                    {% if not  day_labels  %}
+                                        <div class="card" style="padding-left: 5%; padding-top: 1%; border-radius: 10px;">
+                                           <center><h1>ยังไม่เคยมีใครซื้อการ์ดนี้ไปก่อนเลย</h1></center> 
+                                        </div>
+                                        
+                                        {% else %}
+                                        <div class="card" style="padding-left: 5%; padding-top: 1%; border-radius: 10px;">
+
+                                            <div>
+                                                <canvas id="myChart"></canvas>
+                                            </div>
+                                          
+                                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                          
+                                            <script>
+                                                const ctx = document.getElementById('myChart');
+                                          
+                                                new Chart(ctx, {
+                                                type: 'line',
+                                                data: {
+                                                    labels: {{day_labels|safe}},
+                                                    datasets: [{
+                                                    label: 'ราคาที่เคยขายไป',
+                                                    data: {{sale_data|safe}},
+                                                    borderWidth: 1
+                                                    }]
+                                                },
+                                                options: {
+                                                    scales: {
+                                                    y: {
+                                                        beginAtZero: true
+                                                    }
+                                                    }
+                                                }
+                                                });
+                                            </script>
+                                        </div>
+                                    {% endif %}
+
                                     <div class="card" style="padding-left: 5%; padding-top: 1%; border-radius: 10px;">
                                         
                                        <div>
@@ -159,14 +198,18 @@
                                             <center><h1>No one sale this card yet</h1> </center>
                                         {% endif %}
                                     </div> 
-                                        
-                                    
-                                            
-                                            
-                                           
-                                        
-                                        
+               
                                     </div>
+                                    
+                                    
+                                    {%for test in queryset%}
+                                        <p>{{test.saleDay| date:"F d Y"}}</p>
+                                    {% endfor %}
+                                    <p>{{queryset.saleDay}}</p>
+                                    <p>{{day_labels}}</p>
+                                    <p>{{sale_data}}</p>
+
+                                    
                                 </div>
                                 
                             </div>

@@ -114,9 +114,9 @@ class transaction_table (models.Model):
     card_code = models.CharField(max_length=500,null=True,blank=True)
     price_detal = models.IntegerField(null=False,default=0,blank=True)
     is_rate = models.BooleanField(default=False)
-
     # saleRateing = models.IntegerField()
-
+    def __str__(self):
+        return "{}-{}".format(self.saleDay, self.price_detal)
 
 class Rating (models.Model):
     Rate_choice =(

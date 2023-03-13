@@ -75,7 +75,21 @@ def card_inf(request,pk):
     except sale_filter.DoesNotExist:
         sale_filter = None
     # print(sale_filter)
-    context = {'infomat': inf,'new_nation_req_all':nation_al , 'sale_filter' :sale_filter ,'your_profile' : your_profile }
+    
+    day_labels = []
+
+    sale_data = []
+    queryset = transaction_table.objects.filter(card_code = pk).order_by('saleDay')
+
+
+    for sale_detal in queryset :
+        print(sale_detal.saleDay.strftime("%d-%m-%y"))
+        day_labels.append(sale_detal.saleDay.strftime("%d-%m-%y"))
+        sale_data.append(sale_detal.price_detal)
+
+    context = {'infomat': inf,'new_nation_req_all':nation_al 
+               , 'sale_filter' :sale_filter ,'your_profile' : your_profile 
+               ,'queryset':queryset,'day_labels':day_labels,'sale_data':sale_data ,'queryset':queryset}
     html_template = loader.get_template('home/Card&deck_info.html')
     return HttpResponse(html_template.render(context,request))
 
@@ -207,8 +221,10 @@ def saleHistory(request):
     except transec_allTable.DoesNotExist:
         transec_allTable = None
 
+    queryset = transaction_table.objects.order_by('-saleDay')
 
-    context = { 'current_user' : current_user , 'allTable' : transec_allTable ,'sale_history' : sale_his , 'rate_check':rate_check}
+    context = { 'current_user' : current_user , 'allTable' : transec_allTable 
+               ,'sale_history' : sale_his , 'rate_check':rate_check}
     html_template = loader.get_template('home/salehistorypage.html')
     return HttpResponse(html_template.render(context,request))
 
