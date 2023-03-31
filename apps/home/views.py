@@ -72,7 +72,7 @@ def card_inf(request,pk):
 
 
     try:
-        sale_filter = CardWhoWantToSale.objects.filter(card_code_id = pk)
+        sale_filter = CardWhoWantToSale.objects.filter(card_code_id = pk).order_by('-day_created')
     except sale_filter.DoesNotExist:
         sale_filter = None
     # print(sale_filter)
@@ -126,7 +126,7 @@ def update_sale(request,pk):
 def checkRate(request,pk):
     checkuser = pk
     user_rating = Rating.objects.filter( rateUser = pk).aggregate(Avg('rate'))
-    user_history = transaction_table.objects.filter(fromSalerUser = pk)
+    user_history = transaction_table.objects.filter(fromSalerUser = pk).order_by('saleDay')
     ratefilter = Rating.objects.filter( rateUser = pk)
     context = {'user_rating' :user_rating ,'user_history':user_history,'checkuser':checkuser ,'ratefilter':ratefilter}
     html_template = loader.get_template('home/user_rating.html')
@@ -212,13 +212,13 @@ def saleHistory(request):
     transec_allTable = transaction_table
     rate_check = Rating.objects.all()
     try:
-        sale_his = CardWhoWantToSale.objects.filter(userNameWhoWantSale = current_user)
+        sale_his = CardWhoWantToSale.objects.filter(userNameWhoWantSale = current_user).order_by('day_created')
     except sale_his.DoesNotExist:
         sale_his = None
 
 
     try:
-        transec_allTable = transaction_table.objects.filter(toBuyerUser = current_user)
+        transec_allTable = transaction_table.objects.filter(toBuyerUser = current_user).order_by('-saleDay')
     except transec_allTable.DoesNotExist:
         transec_allTable = None
 

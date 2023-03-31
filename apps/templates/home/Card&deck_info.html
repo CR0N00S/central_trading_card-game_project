@@ -131,6 +131,7 @@
                                                 new Chart(ctx, {
                                                 type: 'line',
                                                 data: {
+                                                    
                                                     labels: {{day_labels|safe}},
                                                     datasets: [{
                                                     label: 'ราคาที่เคยขายไป',
@@ -140,7 +141,9 @@
                                                 },
                                                 options: {
                                                     scales: {
+                                                        
                                                     y: {
+                                                        
                                                         beginAtZero: true,
                                                         title:{
                                                             display : true,
@@ -155,7 +158,7 @@
                                                             text: 'วันที่ขาย'
                                                         }
                                                     }
-
+                                                    
                                                     }
                                                 },
                                                 });

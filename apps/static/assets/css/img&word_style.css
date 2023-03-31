@@ -7,19 +7,19 @@
 
 .Header_Namecard{
     font-size: 35px;
-    color: red;
+    color: black;
 }
 
 .card_info{
     font-size: 20px;
-    color: blue;
+    color: black;
     padding-top: 35px;
     text-align: justify;
 }
 
 .price{
     font-size: 20px;
-    color: red;
+    color: black;
     padding-top: 35px;
     text-align: justify;
 }
