@@ -1,5 +1,5 @@
 # central_trading_card-game_project
-วิธีเปิด project
+วิธีเปิด project <br /> 
 ลง requirements <br /> 
 ```
 virtualenv env
