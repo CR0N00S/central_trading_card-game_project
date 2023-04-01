@@ -4,6 +4,14 @@
 ```
 virtualenv env
 .\env\Scripts\activate
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
-newline
+set database
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+run app
+```
+python manage.py runserver
+```
