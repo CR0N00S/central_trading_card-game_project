@@ -1,6 +1,6 @@
 # central_trading_card-game_project
-วิธีเปิด project <br /> 
-ลง requirements <br /> 
+how to open this project <br /> 
+install requirements <br /> 
 ```
 virtualenv env
 .\env\Scripts\activate
@@ -11,7 +11,14 @@ set database
 python manage.py makemigrations
 python manage.py migrate
 ```
-run app
+run the app
 ```
 python manage.py runserver
+```
+web app will be in http://127.0.0.1:8000/
+admin stie is http://127.0.0.1:8000/admin
+
+create superuser for admin site 
+```
+python manage.py createsuperuser
 ```
