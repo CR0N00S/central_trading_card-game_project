@@ -22,7 +22,7 @@ admin site is http://127.0.0.1:8000/admin
 admin
 admin456789
 ```
-## create superuser for admin site 
+## if you want to create superuser for admin site 
 ```
 python manage.py createsuperuser
 ```
