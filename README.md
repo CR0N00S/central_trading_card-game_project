@@ -1,5 +1,5 @@
 # central_trading_card-game_project
-# how to open this project <br /> 
+## how to open this project <br /> 
 ## install requirements <br /> 
 ```
 virtualenv env
