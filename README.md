@@ -15,7 +15,7 @@ run the app
 ```
 python manage.py runserver
 ```
-web app will be in http://127.0.0.1:8000/
+web app will be in http://127.0.0.1:8000/ <br /> 
 admin stie is http://127.0.0.1:8000/admin
 
 create superuser for admin site 
