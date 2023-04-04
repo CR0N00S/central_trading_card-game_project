@@ -160,22 +160,22 @@ def saleConfirm(request,pk):
     surname = request.user.profile.surname
     # print('test', what_price)
     # print('ggez' , price_update.price_average)
-    if(phone_num == None or buyer_addr is exit or firstname is exit or surname is exit):
-        print('firstname =', request.user.profile.name)
-        print('phone =',phone_num)
-        print('addr = ', buyer_addr)
-        # print('shame')
-        # return redirect('/')
+    # if(phone_num == None or buyer_addr is exit or firstname is exit or surname is exit):
+    #     print('firstname =', request.user.profile.name)
+    #     print('phone =',phone_num)
+    #     print('addr = ', buyer_addr)
+    #     # print('shame')
+    #     # return redirect('/')
         
-        context={}
-        html_template = loader.get_template('home/profile.html')
-        return HttpResponse(html_template.render(context,request))
+    #     context={}
+    #     html_template = loader.get_template('home/profile.html')
+    #     return HttpResponse(html_template.render(context,request))
 
-    else:
-        if request.method == 'POST':
+    # else:
+    if request.method == 'POST':
         
-            buy_form = transaction_submit(request.POST)
-            change_avd = change_price_adv(request.POST,instance=price_update)
+        buy_form = transaction_submit(request.POST)
+        change_avd = change_price_adv(request.POST,instance=price_update)
             # print('pass?',change_avd)
             # if buy_form.is_valid():
             #     if(phone_num == None or buyer_addr is exit or firstname is exit or surname is exit):
@@ -185,20 +185,20 @@ def saleConfirm(request,pk):
             #         print('shame')
             #     else:    
             #         print('out')
-            buy=buy_form.save(commit=False)
-            adv =change_avd.save(commit=False)
-            buy.fromSalerUser = from_user
-            buy.toBuyerUser = to_user
-            buy.buyerAddr = buyer_addr
-            buy.buyerPhone = phone_num
-            buy.card_code = what_card
-            buy.price_detal= what_price
-            adv.price_average = what_price
+        buy=buy_form.save(commit=False)
+        adv =change_avd.save(commit=False)
+        buy.fromSalerUser = from_user
+        buy.toBuyerUser = to_user
+        buy.buyerAddr = buyer_addr
+        buy.buyerPhone = phone_num
+        buy.card_code = what_card
+        buy.price_detal= what_price
+        adv.price_average = what_price
             # print('ez')
-            buy_form.save()
-            adv.save()
-            saleSearch.delete()
-            return redirect('/')
+        buy_form.save()
+        adv.save()
+        saleSearch.delete()
+        return redirect('/')
     
     context={}
     html_template = loader.get_template('home/checking_page.html')
